@@ -15,7 +15,7 @@ namespace DO.Asteroids
         {
             state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
             state.RequireForUpdate<LevelBounds>();
-            state.RequireForUpdate<AsteroidsSpawner>();
+            state.RequireForUpdate<AsteroidSpawner>();
             state.RequireForUpdate<AsteroidSettings>();
         }
 
@@ -25,13 +25,13 @@ namespace DO.Asteroids
             var commandBuffer = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>()
                 .CreateCommandBuffer(state.WorldUnmanaged);
             var levelBounds = SystemAPI.GetSingleton<LevelBounds>();
-            var spawner = SystemAPI.GetSingleton<AsteroidsSpawner>();
+            var spawner = SystemAPI.GetSingleton<AsteroidSpawner>();
             var settings = SystemAPI.GetSingleton<AsteroidSettings>();
-            var random = new Random((uint) SystemAPI.Time.ElapsedTime + 42);
+            var random = new Random(spawner.RandomSeed);
 
             var avoidPositions = new NativeList<float3>(Allocator.TempJob) {float3.zero};
 
-            var job = new SpawnAsteroidsJob
+            var jobHandle = new SpawnAsteroidsJob
             {
                 CommandBuffer = commandBuffer,
                 AsteroidPrefab = spawner.AsteroidPrefab,
@@ -43,7 +43,7 @@ namespace DO.Asteroids
                 Settings = settings
             };
 
-            state.Dependency = job.Schedule(state.Dependency);
+            state.Dependency = jobHandle.Schedule(state.Dependency);
             state.Dependency.Complete();
             avoidPositions.Dispose();
             state.Enabled = false;

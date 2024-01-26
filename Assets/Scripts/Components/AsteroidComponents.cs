@@ -3,11 +3,12 @@ using Unity.Mathematics;
 
 namespace DO.Asteroids
 {
-    public struct AsteroidsSpawner : IComponentData
+    public struct AsteroidSpawner : IComponentData
     {
         public Entity AsteroidPrefab;
         public int NumAsteroids;
         public float Radius;
+        public uint RandomSeed;
     }
     
     public struct AsteroidSettings : IComponentData
@@ -37,5 +38,9 @@ namespace DO.Asteroids
     {
         public float Radius;
         public float3 Position;
+    }
+    
+    public struct Wrap : IComponentData
+    {
     }
 }

@@ -172,6 +172,7 @@ MonoBehaviour:
     type: 3}
   NumAsteroids: 8
   Radius: 0.5
+  RandomSeed: 42
 --- !u!114 &537438762
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ namespace DO.Asteroids
                 AddComponent(entity, new Asteroid());
                 AddComponent(entity, new PhysicsBounds {Radius = authoring.Radius});
                 AddComponent(entity, new Velocity());
+                AddComponent(entity, new Wrap());
             }
         }
     }

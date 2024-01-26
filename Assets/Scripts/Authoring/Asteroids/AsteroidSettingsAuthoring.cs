@@ -1,4 +1,5 @@
 using Unity.Entities;
+using Unity.Entities.UI;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -6,7 +7,8 @@ namespace DO.Asteroids
 {
     public class AsteroidSettingsAuthoring : MonoBehaviour
     {
-        public float2 MinMaxSpeed;
+        [MinMax(0, 100)]
+        public Vector2 MinMaxSpeed;
         public float2 MinMaxRotationSpeed;
 
         public class AsteroidSettingsBaker : Baker<AsteroidSettingsAuthoring>
