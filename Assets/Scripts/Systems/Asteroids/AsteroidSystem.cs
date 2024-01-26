@@ -27,9 +27,10 @@ namespace DO.Asteroids
     {
         public float DeltaTime;
 
-        public void Execute(ref LocalTransform transform, in RotationSpeed rotationSpeed)
+        public void Execute(ref LocalTransform transform, in RotationSpeed rotationSpeed, in Velocity velocity)
         {
             transform.Rotation = math.mul(transform.Rotation, quaternion.Euler(math.radians(rotationSpeed.Value) * DeltaTime));
+            transform.Position += new float3(velocity.Value, 0) * DeltaTime;
         }
     }
 }

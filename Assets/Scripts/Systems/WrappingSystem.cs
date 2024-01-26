@@ -13,7 +13,7 @@ namespace DO.Asteroids
         public void OnUpdate(ref SystemState state)
         {
             var levelBounds = SystemAPI.GetSingleton<LevelBounds>();
-            Debug.Log("Level bounds: " + levelBounds.Bounds);
+            //Debug.Log("Level bounds: " + levelBounds.Bounds);
         }
     }
 }

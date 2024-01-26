@@ -6,8 +6,9 @@ namespace DO.Asteroids
 {
     public class AsteroidsSpawnerAuthoring : MonoBehaviour
     {
-        public GameObject asteroidPrefab;
-        public int numAsteroids = 8;
+        public GameObject AsteroidPrefab;
+        public int NumAsteroids = 8;
+        public float Radius = 0.5f;
 
         public class AsteroidsSpawnerBaker : Baker<AsteroidsSpawnerAuthoring>
         {
@@ -17,8 +18,9 @@ namespace DO.Asteroids
                 AddComponent(entity,
                     new AsteroidsSpawner
                     {
-                        AsteroidPrefab = GetEntity(authoring.asteroidPrefab, TransformUsageFlags.Dynamic),
-                        NumAsteroids = authoring.numAsteroids
+                        AsteroidPrefab = GetEntity(authoring.AsteroidPrefab, TransformUsageFlags.Dynamic),
+                        NumAsteroids = authoring.NumAsteroids,
+                        Radius = authoring.Radius
                     });
             }
         }
