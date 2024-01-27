@@ -27,15 +27,29 @@ namespace DO.Asteroids
         }
     }
 
+    /// <summary>
+    /// Job to handle ship movement 
+    /// </summary>
     [BurstCompile]
-    [WithAll(typeof(Ship))]
     partial struct ShipMovementJob : IJobEntity
     {
         public float DeltaTime;
 
-        private void Execute(ref LocalTransform transform, in PlayerInput input)
+        private void Execute(ref LocalTransform transform, ref Velocity velocity, in PlayerInput input, in Ship ship)
         {
-            transform.Rotation = math.mul(transform.Rotation, quaternion.RotateZ(math.radians(input.Rotation * 60f) * DeltaTime));
+            transform.Rotation = math.mul(transform.Rotation, quaternion.RotateZ(math.radians(-input.Rotation * ship.TurnTorque) * DeltaTime));
+
+            if (input.Thrust)
+            {
+                var forward = new float3(0, ship.ThrustForce * DeltaTime, 0);
+                velocity.Value += math.mul(transform.Rotation, forward).xy;
+            }
+            else
+            {
+                velocity.Value -= velocity.Value * ship.Drag * DeltaTime;
+            }
+            
+            transform.Position.xy += velocity.Value * DeltaTime;
         }
     }
 }
