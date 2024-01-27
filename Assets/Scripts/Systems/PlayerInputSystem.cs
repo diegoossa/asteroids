@@ -7,10 +7,11 @@ namespace DO.Asteroids
     public partial class PlayerInputSystem : SystemBase
     {
         private InputActions _inputActions;
-        
+
         protected override void OnCreate()
         {
             _inputActions = new InputActions();
+            RequireForUpdate<PlayerInput>();
         }
 
         protected override void OnStartRunning()
@@ -25,18 +26,17 @@ namespace DO.Asteroids
 
         protected override void OnUpdate()
         {
+            var playerInput = SystemAPI.GetSingletonRW<PlayerInput>();
+            
             var shoot = _inputActions.Game.Shoot.IsPressed();
             var thrust = _inputActions.Game.Thrust.IsPressed();
             var rotation = _inputActions.Game.Rotate.ReadValue<float>();
             
-            Debug.Log($"Shoot > {shoot} ::: Thrust > {thrust} ::: Rotation > {rotation}");
-        }
-    }
+            playerInput.ValueRW.Rotation = rotation;
+            playerInput.ValueRW.Thrust = thrust;
+            playerInput.ValueRW.Shoot = shoot;
 
-    public struct PlayerInput : IComponentData
-    {
-        public float Rotation;
-        public bool Thrust;
-        public bool Shoot;
+            //Debug.Log($"Shoot > {shoot} ::: Thrust > {thrust} ::: Rotation > {rotation}");
+        }
     }
 }
