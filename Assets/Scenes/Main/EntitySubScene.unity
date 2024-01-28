@@ -171,7 +171,6 @@ MonoBehaviour:
   AsteroidPrefab: {fileID: 3386189613982008513, guid: 57241843b3aad3d4782e79dfe2edb165,
     type: 3}
   NumAsteroids: 8
-  Radius: 0.5
   RandomSeed: 42
 --- !u!114 &537438762
 MonoBehaviour:
@@ -189,6 +188,7 @@ MonoBehaviour:
   MinMaxRotationSpeed:
     x: -7
     y: 7
+  Radius: 0.5
 --- !u!1001 &460234923037568285
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246,16 +246,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7559865646002235991, guid: c6090d219932b9348840dd634cc6a0b0,
-        type: 3}
-      propertyPath: Drag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7559865646002235991, guid: c6090d219932b9348840dd634cc6a0b0,
-        type: 3}
-      propertyPath: Radius
-      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7890276549645126537, guid: c6090d219932b9348840dd634cc6a0b0,
         type: 3}
