@@ -171,7 +171,8 @@ MonoBehaviour:
   AsteroidPrefab: {fileID: 3386189613982008513, guid: 57241843b3aad3d4782e79dfe2edb165,
     type: 3}
   NumAsteroids: 8
-  RandomSeed: 42
+  RandomSeed: 777
+  ShouldSpawn: 1
 --- !u!114 &537438762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,10 +185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2a3bf0a8ae4849a58bbdc5d67942cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinMaxSpeed: {x: 0.25, y: 1}
-  MinMaxRotationSpeed:
-    x: -7
-    y: 7
+  Speed: 0.25
+  RotationSpeed: 7
   Radius: 0.5
 --- !u!1001 &460234923037568285
 PrefabInstance:

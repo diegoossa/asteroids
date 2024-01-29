@@ -23,7 +23,7 @@ namespace DO.Asteroids
             var shipVelocity = SystemAPI.GetComponent<Velocity>(shipEntity);
             var exhaustTransform = SystemAPI.GetComponent<LocalTransform>(exhaustEntity);
             
-            var newScale = math.clamp(math.length(shipVelocity.Value), 0f, 1.6f);
+            var newScale = math.clamp(math.length(shipVelocity.Value), 0f, 1.5f);
             SystemAPI.SetComponent(exhaustEntity, LocalTransform.FromPositionRotationScale(exhaustTransform.Position, exhaustTransform.Rotation, newScale));
         }
     }

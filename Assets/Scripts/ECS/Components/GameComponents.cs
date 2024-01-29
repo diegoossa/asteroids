@@ -37,6 +37,10 @@ namespace DO.Asteroids
     public struct Wrap : IComponentData { }
     
     public struct Enemy : IComponentData { }
-    
-    public struct TakeDamage : IComponentData { }
+
+    public struct DamageEvent : IComponentData
+    {
+        public Entity Source;
+        public float2 Position;
+    }
 }

@@ -9,12 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83423c6821253f946aa2dd9db23584ed, type: 3}
-  m_Name: GlobalEntitySceneDependency
+  m_Script: {fileID: 11500000, guid: ffc118e29fd802643b71f55b72143fbf, type: 3}
+  m_Name: HybridSettingsInstaller
   m_EditorClassIdentifier: 
-  cacheGUID:
-    Value:
-      x: 3910443834
-      y: 1317498488
-      z: 581558404
-      w: 2338877376

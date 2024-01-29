@@ -4,7 +4,6 @@ using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
-using Random = Unity.Mathematics.Random;
 
 namespace DO.Asteroids
 {
@@ -15,27 +14,31 @@ namespace DO.Asteroids
         {
             state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
             state.RequireForUpdate<LevelBounds>();
-            state.RequireForUpdate<AsteroidSpawner>();
+            state.RequireForUpdate<AsteroidRandomSpawner>();
             state.RequireForUpdate<AsteroidSettings>();
         }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
+            var spawner = SystemAPI.GetSingletonRW<AsteroidRandomSpawner>();
+            if (!spawner.ValueRO.ShouldSpawn)
+                return;
+
             var commandBuffer = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>()
                 .CreateCommandBuffer(state.WorldUnmanaged);
             var levelBounds = SystemAPI.GetSingleton<LevelBounds>();
-            var spawner = SystemAPI.GetSingleton<AsteroidSpawner>();
+
             var settings = SystemAPI.GetSingleton<AsteroidSettings>();
-            var random = new Random(spawner.RandomSeed);
+            var random = new Random(spawner.ValueRO.RandomSeed);
 
             var avoidPositions = new NativeList<float3>(Allocator.TempJob) {float3.zero};
 
             var jobHandle = new SpawnAsteroidsJob
             {
                 CommandBuffer = commandBuffer,
-                AsteroidPrefab = spawner.AsteroidPrefab,
-                NumAsteroids = spawner.NumAsteroids,
+                AsteroidPrefab = spawner.ValueRO.AsteroidPrefab,
+                NumAsteroids = spawner.ValueRO.NumAsteroids,
                 Bounds = levelBounds.Bounds,
                 Rnd = random,
                 AvoidPositions = avoidPositions,
@@ -45,7 +48,9 @@ namespace DO.Asteroids
             state.Dependency = jobHandle.Schedule(state.Dependency);
             state.Dependency.Complete();
             avoidPositions.Dispose();
-            state.Enabled = false;
+
+            // After spawning, set the spawner to not spawn
+            spawner.ValueRW.ShouldSpawn = false;
         }
     }
 
@@ -69,9 +74,9 @@ namespace DO.Asteroids
                 if (TryGetValidPosition(ref Rnd, ref AvoidPositions, 5, Settings.Radius, out var randomPosition))
                 {
                     CommandBuffer.SetComponent(asteroidEntity, LocalTransform.FromPositionRotation(randomPosition, Rnd.NextQuaternionRotation()));
-                    CommandBuffer.SetComponent(asteroidEntity, new RotationSpeed {Value = Rnd.NextFloat3(Settings.MinMaxRotationSpeed.x, Settings.MinMaxRotationSpeed.y)});
+                    CommandBuffer.SetComponent(asteroidEntity, new RotationSpeed {Value = Settings.RotationSpeed});
                     CommandBuffer.SetComponent(asteroidEntity, new Direction {Value = Rnd.NextFloat2Direction()});
-                    CommandBuffer.SetComponent(asteroidEntity, new Speed {Value = Rnd.NextFloat(Settings.MinMaxSpeed.x, Settings.MinMaxSpeed.y)});
+                    CommandBuffer.SetComponent(asteroidEntity, new Speed {Value = Settings.Speed});
                 }
             }
         }

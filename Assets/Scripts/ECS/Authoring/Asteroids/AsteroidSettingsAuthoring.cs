@@ -8,8 +8,8 @@ namespace DO.Asteroids
     public class AsteroidSettingsAuthoring : MonoBehaviour
     {
         [MinMax(0, 100)]
-        public Vector2 MinMaxSpeed;
-        public float2 MinMaxRotationSpeed;
+        public float Speed;
+        public float RotationSpeed;
         public float Radius = 0.5f;
 
         public class AsteroidSettingsBaker : Baker<AsteroidSettingsAuthoring>
@@ -20,8 +20,8 @@ namespace DO.Asteroids
                 AddComponent(entity,
                     new AsteroidSettings
                     {
-                        MinMaxSpeed = authoring.MinMaxSpeed,
-                        MinMaxRotationSpeed = authoring.MinMaxRotationSpeed,
+                        Speed = authoring.Speed,
+                        RotationSpeed = authoring.RotationSpeed,
                         Radius = authoring.Radius,
                     });
             }

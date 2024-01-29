@@ -64,7 +64,7 @@ namespace DO.Asteroids
                     if (Intersect(enemyBounds, bulletBounds, enemyPosition, bulletPosition))
                     {
                         CommandBuffer.DestroyEntity(bullet);
-                        CommandBuffer.AddComponent<TakeDamage>(entity);
+                        CommandBuffer.AddComponent<DamageEvent>(entity);
                     }
                 }
             }
