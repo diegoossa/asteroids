@@ -37,25 +37,25 @@ namespace DO.Asteroids
     {
         public float4 LevelBounds;
 
-        private void Execute(ref LocalTransform transform, in PhysicsBounds physicsBounds)
+        private void Execute(ref LocalTransform transform, in PhysicsRadius physicsRadius)
         {
             var position = transform.Position;
 
-            if (position.x < LevelBounds.x - physicsBounds.Radius)
+            if (position.x < LevelBounds.x - physicsRadius.Radius)
             {
-                position.x = LevelBounds.y + physicsBounds.Radius;
+                position.x = LevelBounds.y + physicsRadius.Radius;
             }
-            else if (position.x > LevelBounds.y + physicsBounds.Radius)
+            else if (position.x > LevelBounds.y + physicsRadius.Radius)
             {
-                position.x = LevelBounds.x - physicsBounds.Radius;
+                position.x = LevelBounds.x - physicsRadius.Radius;
             }
-            else if (position.y < LevelBounds.z - physicsBounds.Radius)
+            else if (position.y < LevelBounds.z - physicsRadius.Radius)
             {
-                position.y = LevelBounds.w + physicsBounds.Radius;
+                position.y = LevelBounds.w + physicsRadius.Radius;
             } 
-            else if (position.y > LevelBounds.w + physicsBounds.Radius)
+            else if (position.y > LevelBounds.w + physicsRadius.Radius)
             {
-                position.y = LevelBounds.z - physicsBounds.Radius;
+                position.y = LevelBounds.z - physicsRadius.Radius;
             }
             
             transform.Position = position;

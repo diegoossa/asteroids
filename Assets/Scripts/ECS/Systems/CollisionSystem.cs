@@ -6,12 +6,13 @@ using Unity.Transforms;
 
 namespace DO.Asteroids
 {
-    // [BurstCompile]
+    [BurstCompile]
     [UpdateAfter(typeof(TransformSystemGroup))]
     public partial struct CollisionSystem : ISystem
     {
         private EntityQuery _bulletQuery;
         
+        [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
@@ -32,7 +33,7 @@ namespace DO.Asteroids
             {
                 CommandBuffer = commandBuffer,
                 Bullets = bulletEntities,
-                PhysicsBoundsLookup = SystemAPI.GetComponentLookup<PhysicsBounds>(),
+                PhysicsBoundsLookup = SystemAPI.GetComponentLookup<PhysicsRadius>(),
                 LocalTransformLookup = SystemAPI.GetComponentLookup<LocalTransform>()
             };
 
@@ -42,32 +43,35 @@ namespace DO.Asteroids
         }
 
         [BurstCompile]
-        [WithAll(typeof(PhysicsBounds), typeof(LocalTransform), typeof(Asteroid))]
+        [WithAll(typeof(PhysicsRadius), typeof(LocalTransform), typeof(Enemy))]
         partial struct CollisionJob : IJobEntity
         {
-            [ReadOnly] public ComponentLookup<PhysicsBounds> PhysicsBoundsLookup;
+            [ReadOnly] public ComponentLookup<PhysicsRadius> PhysicsBoundsLookup;
             [ReadOnly] public ComponentLookup<LocalTransform> LocalTransformLookup;
             [ReadOnly] public NativeArray<Entity> Bullets;
             public EntityCommandBuffer CommandBuffer;
                 
             private void Execute(Entity entity)
             {
-                var asteroidBounds = PhysicsBoundsLookup[entity].Radius;
-                var asteroidPosition = LocalTransformLookup[entity].Position.xy;
+                var enemyBounds = PhysicsBoundsLookup[entity].Radius;
+                var enemyPosition = LocalTransformLookup[entity].Position.xy;
                 
                 foreach (var bullet in Bullets)
                 {
                     var bulletBounds = PhysicsBoundsLookup[bullet].Radius;
                     var bulletPosition = LocalTransformLookup[bullet].Position.xy;
                     
-                    if (Intersect(asteroidBounds, bulletBounds, asteroidPosition, bulletPosition))
+                    if (Intersect(enemyBounds, bulletBounds, enemyPosition, bulletPosition))
                     {
                         CommandBuffer.DestroyEntity(bullet);
-                        CommandBuffer.DestroyEntity(entity);
+                        CommandBuffer.AddComponent<TakeDamage>(entity);
                     }
                 }
             }
             
+            /// <summary>
+            /// Check if two circles intersect
+            /// </summary>
             private static bool Intersect(float radius, float otherRadius, float2 position, float2 otherPosition)
             {
                 var diff = position - otherPosition;
