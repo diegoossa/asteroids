@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/USS/Styles.uss?fileID=7433441132597879392&amp;guid=43d4dca7964360e4c97a8ce2d69fcb31&amp;type=3#Styles" />
+    <ui:VisualElement name="hud__container" class="full-screen" style="flex-grow: 1; align-items: flex-start; display: none;">
+        <ui:VisualElement name="top-left-panel" style="padding-top: 30px; padding-right: 30px; padding-bottom: 30px; padding-left: 30px;">
+            <ui:VisualElement name="score-container" style="flex-grow: 1; flex-direction: row;">
+                <ui:Label tabindex="-1" text="SCORE:" parse-escape-sequences="true" display-tooltip-when-elided="true" name="score-label" class="score-label" />
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="score-value" class="score-label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="menu__container" class="full-screen align-center" style="background-color: rgba(0, 0, 0, 0.5);">
+        <ui:Label tabindex="-1" text="ASTEROIDS" parse-escape-sequences="true" display-tooltip-when-elided="true" name="game-title" class="menu-title" />
+        <ui:VisualElement name="menu__options">
+            <ui:Button text="PLAY" parse-escape-sequences="true" display-tooltip-when-elided="true" name="play-button" class="button" />
+            <ui:Button text="HIGH SCORES" parse-escape-sequences="true" display-tooltip-when-elided="true" name="high-scores-button" class="button" />
+            <ui:Button text="EXIT" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exit-button" class="button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

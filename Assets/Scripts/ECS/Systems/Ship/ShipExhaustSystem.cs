@@ -22,9 +22,10 @@ namespace DO.Asteroids
             var exhaustEntity = SystemAPI.GetSingletonEntity<ShipExhaust>();
             var shipVelocity = SystemAPI.GetComponent<Velocity>(shipEntity);
             var exhaustTransform = SystemAPI.GetComponent<LocalTransform>(exhaustEntity);
-            
-            var newScale = math.clamp(math.length(shipVelocity.Value), 0f, 1.5f);
-            SystemAPI.SetComponent(exhaustEntity, LocalTransform.FromPositionRotationScale(exhaustTransform.Position, exhaustTransform.Rotation, newScale));
+
+            var variance = math.length(math.sin(shipVelocity.Value * shipVelocity.Value) * 0.25f);
+            var targetScale = math.clamp(math.length(shipVelocity.Value), 0f, 1.25f) + variance;
+            SystemAPI.SetComponent(exhaustEntity, LocalTransform.FromPositionRotationScale(exhaustTransform.Position, exhaustTransform.Rotation, targetScale));
         }
     }
 }

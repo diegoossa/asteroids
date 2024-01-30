@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc118e29fd802643b71f55b72143fbf, type: 3}
   m_Name: HybridSettingsInstaller
   m_EditorClassIdentifier: 
+  GameInstallerSettings:
+    ExplosionPrefab: {fileID: 3587334949010816660, guid: dd829a0b488b32f408672c74badefb61,
+      type: 3}

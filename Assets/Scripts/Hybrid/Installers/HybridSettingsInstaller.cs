@@ -1,10 +1,16 @@
 using UnityEngine;
 using Zenject;
 
-[CreateAssetMenu(fileName = "HybridSettingsInstaller", menuName = "Installers/HybridSettingsInstaller")]
-public class HybridSettingsInstaller : ScriptableObjectInstaller<HybridSettingsInstaller>
+namespace DO.Asteroids.Hybrid
 {
-    public override void InstallBindings()
+    [CreateAssetMenu(fileName = "HybridSettingsInstaller", menuName = "Installers/HybridSettingsInstaller")]
+    public class HybridSettingsInstaller : ScriptableObjectInstaller<HybridSettingsInstaller>
     {
+        public HybridGameInstaller.Settings GameInstallerSettings;
+        
+        public override void InstallBindings()
+        {
+            Container.BindInstance(GameInstallerSettings).IfNotBound();
+        }
     }
 }
