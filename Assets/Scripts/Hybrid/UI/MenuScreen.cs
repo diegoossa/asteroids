@@ -1,24 +1,23 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using Zenject;
 
 namespace DO.Asteroids.Hybrid
 {
     [RequireComponent(typeof(UIDocument))]
     public class MenuScreen : MonoBehaviour
     {
-        private SignalBus _signalBus;
+        // private SignalBus _signalBus;
         
         private VisualElement _menuContainer;
         private Button _playButton;
         private Button _highScoresButton;
         private Button _exitButton;
         
-        [Inject]
-        public void Construct(SignalBus signalBus)
-        {
-            _signalBus = signalBus;
-        }
+        // [Inject]
+        // public void Construct(SignalBus signalBus)
+        // {
+        //     _signalBus = signalBus;
+        // }
 
         private void OnEnable()
         {
@@ -41,7 +40,7 @@ namespace DO.Asteroids.Hybrid
         private void OnPlayButtonClicked(ClickEvent evt)
         {
             _menuContainer.style.display = DisplayStyle.None;
-            _signalBus.Fire<StartGameSignal>();
+            //_signalBus.Fire<StartGameSignal>();
         }
         private void OnDisable()
         {

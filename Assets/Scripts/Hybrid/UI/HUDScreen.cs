@@ -1,21 +1,20 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using Zenject;
 
 namespace DO.Asteroids.Hybrid
 {
     [RequireComponent(typeof(UIDocument))]
     public class HUDScreen : MonoBehaviour
     {
-        private SignalBus _signalBus;
+        // private SignalBus _signalBus;
         
         private VisualElement _hudContainer;
         
-        [Inject]
-        public void Construct(SignalBus signalBus)
-        {
-            _signalBus = signalBus;
-        }
+        // [Inject]
+        // public void Construct(SignalBus signalBus)
+        // {
+        //     _signalBus = signalBus;
+        // }
 
         private void OnEnable()
         {
@@ -34,13 +33,13 @@ namespace DO.Asteroids.Hybrid
 
         private void UnregisterCallbacks()
         {
-            _signalBus.Unsubscribe<StartGameSignal>(OnGameStarted);
+            //_signalBus.Unsubscribe<StartGameSignal>(OnGameStarted);
         }
 
         #endregion
         private void RegisterCallbacks()
         {
-            _signalBus.Subscribe<StartGameSignal>(OnGameStarted);
+            //_signalBus.Subscribe<StartGameSignal>(OnGameStarted);
         }
 
         private void OnGameStarted()
