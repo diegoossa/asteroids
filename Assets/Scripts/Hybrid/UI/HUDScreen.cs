@@ -37,7 +37,6 @@ namespace DO.Asteroids.Hybrid
             _signalBus.Unsubscribe<StartGameSignal>(OnGameStarted);
         }
 
-        #endregion
         private void RegisterCallbacks()
         {
             _signalBus.Subscribe<StartGameSignal>(OnGameStarted);
@@ -47,5 +46,7 @@ namespace DO.Asteroids.Hybrid
         {
             _hudContainer.style.display = DisplayStyle.Flex;
         }
+        
+        #endregion
     }
 }

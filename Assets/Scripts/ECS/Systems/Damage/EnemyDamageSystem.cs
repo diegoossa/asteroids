@@ -5,7 +5,7 @@ using Unity.Transforms;
 
 namespace DO.Asteroids
 {
-    [UpdateAfter(typeof(CollisionSystem))]
+    [UpdateAfter(typeof(SpawnExplosionSystem))]
     public partial struct EnemyDamageSystem : ISystem
     {
         [BurstCompile]

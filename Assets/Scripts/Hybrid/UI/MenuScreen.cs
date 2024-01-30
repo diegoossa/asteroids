@@ -41,7 +41,7 @@ namespace DO.Asteroids.Hybrid
         private void OnPlayButtonClicked(ClickEvent evt)
         {
             _menuContainer.style.display = DisplayStyle.None;
-            _signalBus.Fire<StartGameSignal>();
+            HybridSignalBus.Instance.OnGameStateChange?.Invoke(GameState.Play);
         }
         private void OnDisable()
         {

@@ -1,5 +1,4 @@
 using System;
-using Unity.Entities;
 using UnityEngine;
 using Zenject;
 
@@ -12,8 +11,13 @@ namespace DO.Asteroids.Hybrid
         public override void InstallBindings()
         {
             InstallFactories();
+            InstallManagers();
             InstallSignals();
-            InstallSystems();
+        }
+
+        private void InstallManagers()
+        {
+            Container.BindInterfacesAndSelfTo<VFXManager>().AsSingle();
         }
 
         private void InstallFactories()
@@ -28,12 +32,8 @@ namespace DO.Asteroids.Hybrid
         private void InstallSignals()
         {
             SignalBusInstaller.Install(Container);
-
             Container.DeclareSignal<StartGameSignal>();
-        }
-
-        private void InstallSystems()
-        {
+            Container.BindInterfacesAndSelfTo<HybridSignalBus>().AsSingle();
         }
 
         [Serializable]

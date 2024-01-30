@@ -22,7 +22,7 @@ namespace DO.Asteroids.Hybrid
 
         public void OnSpawned(IMemoryPool pool)
         {
-            vfx.Clear();
+            //vfx.Clear();
             vfx.Play();
 
             _startTime = Time.realtimeSinceStartup;

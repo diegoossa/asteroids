@@ -4,7 +4,7 @@ using Unity.Entities;
 
 namespace DO.Asteroids
 {
-    [UpdateAfter(typeof(CollisionSystem))]
+    [UpdateAfter(typeof(SpawnExplosionSystem))]
     public partial struct ShipDamageSystem : ISystem
     {
         private EntityQuery _damagedShipQuery;
