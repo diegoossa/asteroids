@@ -155,6 +155,7 @@ MonoBehaviour:
   ShipPrefab: {fileID: 7890276549645126537, guid: c6090d219932b9348840dd634cc6a0b0,
     type: 3}
   TimeToSpawn: 1
+  ShouldSpawn: 0
   InitialLives: 3
 --- !u!4 &243279584
 Transform:

@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletPrefab: {fileID: 3042762694502728888, guid: 4a50d6e9e59373f48b54989021ec565f,
     type: 3}
-  Cooldown: 0.2
+  Cooldown: 0.25
   Spread: 0
 --- !u!23 &1291276080195417749
 MeshRenderer:

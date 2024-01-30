@@ -1,37 +1,27 @@
 ﻿// using DO.Asteroids.Hybrid;
 // using Unity.Entities;
 // using UnityEngine;
-// using Zenject;
 //
 // namespace DO.Asteroids
 // {
-//     [DisableAutoCreation]
 //     public partial class GameHybridBindSystem : SystemBase
-//     {
-//         SignalBus _signalBus;
-//         
-//         [Inject]
-//         public void Construct(SignalBus signalBus)
-//         {
-//             _signalBus = signalBus;
-//             //signalBus.Subscribe<StartGameSignal>(OnGameStarted);
-//         }
-//         
-//         protected override void OnCreate()
-//         {
-//             _signalBus.Subscribe<StartGameSignal>(OnGameStarted);
-//         }
-//
-//         private void OnGameStarted()
-//         {
-//             Debug.Log("GAME START FROM SYSTEM");
-//         }
-//
+//     { 
 //         protected override void OnUpdate()
 //         {
+//             if(HybridMessageBus.Instance == null)
+//             {
+//                 Debug.Log("NO HYBRID MESSAGE BUS");
+//                 return;
+//             }
+//             
 //             Debug.Log("UPDATE FROM SYSTEM");
+//             
+//             HybridMessageBus.Instance.OnGameStateChange += OnGameStateChange;
+//         }
+//
+//         private void OnGameStateChange(GameStateEnum state, int score)
+//         {
+//             Debug.Log("GAME STATE CHANGE FROM SYSTEM");
 //         }
 //     }
-//     
-//     
 // }

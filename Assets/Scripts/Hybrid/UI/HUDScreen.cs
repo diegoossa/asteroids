@@ -1,3 +1,5 @@
+using System;
+using MessagePipe;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -6,26 +8,20 @@ namespace DO.Asteroids.Hybrid
     [RequireComponent(typeof(UIDocument))]
     public class HUDScreen : MonoBehaviour
     {
-        // private SignalBus _signalBus;
-        
         private VisualElement _hudContainer;
         
-        // [Inject]
-        // public void Construct(SignalBus signalBus)
-        // {
-        //     _signalBus = signalBus;
-        // }
-
         private void OnEnable()
         {
             var root = GetComponent<UIDocument>().rootVisualElement;
             _hudContainer = root.Q<VisualElement>("hud__container");
-            
             RegisterCallbacks();
         }
 
-        #region Events
-        
+        private void RegisterCallbacks()
+        {
+            HybridMessageBus.Instance.OnGameStateChange += OnGameStarted;
+        }
+       
         private void OnDisable()
         {
             UnregisterCallbacks();
@@ -33,18 +29,12 @@ namespace DO.Asteroids.Hybrid
 
         private void UnregisterCallbacks()
         {
-            //_signalBus.Unsubscribe<StartGameSignal>(OnGameStarted);
+            HybridMessageBus.Instance.OnGameStateChange -= OnGameStarted;
         }
 
-        #endregion
-        private void RegisterCallbacks()
+        private void OnGameStarted(GameState gameState)
         {
-            //_signalBus.Subscribe<StartGameSignal>(OnGameStarted);
-        }
-
-        private void OnGameStarted()
-        {
-            _hudContainer.style.display = DisplayStyle.Flex;
+            _hudContainer.style.display = gameState == GameState.Play ? DisplayStyle.Flex : DisplayStyle.None;
         }
     }
 }

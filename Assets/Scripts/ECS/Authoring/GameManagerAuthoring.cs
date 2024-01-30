@@ -8,6 +8,7 @@ namespace DO.Asteroids
         [Header("Ship Spawn Settings")]
         public GameObject ShipPrefab;
         public float TimeToSpawn;
+        public bool ShouldSpawn;
         [Header("Lives")]
         public int InitialLives;
 
@@ -20,7 +21,7 @@ namespace DO.Asteroids
                 {
                     ShipPrefab = GetEntity(authoring.ShipPrefab, TransformUsageFlags.Dynamic),
                     TimeToSpawn = authoring.TimeToSpawn,
-                    ShouldSpawn = true
+                    ShouldSpawn = authoring.ShouldSpawn
                 });
                 AddComponent(entity, new Lives
                     {InitialLives = authoring.InitialLives, CurrentLives = authoring.InitialLives});

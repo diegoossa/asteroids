@@ -1,24 +1,19 @@
+using System;
+using MessagePipe;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VContainer;
 
 namespace DO.Asteroids.Hybrid
 {
     [RequireComponent(typeof(UIDocument))]
     public class MenuScreen : MonoBehaviour
     {
-        // private SignalBus _signalBus;
-        
         private VisualElement _menuContainer;
         private Button _playButton;
         private Button _highScoresButton;
         private Button _exitButton;
         
-        // [Inject]
-        // public void Construct(SignalBus signalBus)
-        // {
-        //     _signalBus = signalBus;
-        // }
-
         private void OnEnable()
         {
             var root = GetComponent<UIDocument>().rootVisualElement;
@@ -40,7 +35,7 @@ namespace DO.Asteroids.Hybrid
         private void OnPlayButtonClicked(ClickEvent evt)
         {
             _menuContainer.style.display = DisplayStyle.None;
-            //_signalBus.Fire<StartGameSignal>();
+            HybridMessageBus.Instance.OnGameStateChange?.Invoke(GameState.Play);
         }
         private void OnDisable()
         {

@@ -8,6 +8,7 @@ namespace DO.Asteroids
         public float TimeToSpawn;
         public float CurrentTimer;
         public bool ShouldSpawn;
+        public GameState GameState;
     }
 
     public struct Lives : IComponentData
@@ -19,5 +20,14 @@ namespace DO.Asteroids
     public struct Score : IComponentData
     {
         public int Value;
+    }
+    
+    public enum GameState
+    {
+        None,
+        Menu,
+        Play,
+        Pause,
+        GameOver
     }
 }
