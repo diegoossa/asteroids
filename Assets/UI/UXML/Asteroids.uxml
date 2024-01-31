@@ -4,11 +4,12 @@
         <ui:VisualElement name="top-left-panel" style="padding-top: 30px; padding-right: 30px; padding-bottom: 30px; padding-left: 30px;">
             <ui:VisualElement name="score-container" style="flex-grow: 1; flex-direction: row;">
                 <ui:Label tabindex="-1" text="SCORE:" parse-escape-sequences="true" display-tooltip-when-elided="true" name="score-label" class="score-label" />
-                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="score-value" class="score-label" />
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="score-value-label" class="score-value" />
             </ui:VisualElement>
+            <ui:VisualElement name="life-container" style="flex-grow: 1; flex-direction: row;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="menu__container" class="full-screen align-center" style="background-color: rgba(0, 0, 0, 0.5);">
+    <ui:VisualElement name="menu__container" class="full-screen align-center" style="background-color: rgba(0, 0, 0, 0.5); display: flex;">
         <ui:Label tabindex="-1" text="ASTEROIDS" parse-escape-sequences="true" display-tooltip-when-elided="true" name="game-title" class="menu-title" />
         <ui:VisualElement name="menu__options">
             <ui:Button text="PLAY" parse-escape-sequences="true" display-tooltip-when-elided="true" name="play-button" class="button" />

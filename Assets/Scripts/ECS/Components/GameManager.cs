@@ -14,12 +14,14 @@ namespace DO.Asteroids
     public struct Lives : IComponentData
     {
         public int InitialLives;
+        public int LastLives;
         public int CurrentLives;
     }
     
     public struct Score : IComponentData
     {
         public int Value;
+        public int LastScore;
     }
     
     public enum GameState

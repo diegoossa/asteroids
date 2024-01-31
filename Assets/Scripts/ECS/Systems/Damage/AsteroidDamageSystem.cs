@@ -15,6 +15,7 @@ namespace DO.Asteroids
             state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
             state.RequireForUpdate<DamageEvent>();
             state.RequireForUpdate<Asteroid>();
+            state.RequireForUpdate<Score>();
         }
 
         [BurstCompile]
@@ -24,12 +25,16 @@ namespace DO.Asteroids
                 .CreateCommandBuffer(state.WorldUnmanaged);
             var random = new Random((uint) SystemAPI.Time.ElapsedTime * 100 + 1);
             var stageBuffer = SystemAPI.GetSingletonBuffer<Stage>();
+            var scoreEntity = SystemAPI.GetSingletonEntity<Score>();
+            var score = SystemAPI.GetComponentRO<Score>(scoreEntity).ValueRO.Value;
 
             var jobHandle = new AsteroidDamageJob
             {
                 CommandBuffer = commandBuffer,
                 Rnd = random,
-                StageBuffer = stageBuffer
+                StageBuffer = stageBuffer,
+                ScoreEntity = scoreEntity,
+                CurrentScore = score
             };
 
             state.Dependency = jobHandle.Schedule(state.Dependency);
@@ -39,19 +44,22 @@ namespace DO.Asteroids
         [WithAll(typeof(DamageEvent))]
         partial struct AsteroidDamageJob : IJobEntity
         {
+            [ReadOnly] public DynamicBuffer<Stage> StageBuffer;
             public EntityCommandBuffer CommandBuffer;
             public Random Rnd;
-            [ReadOnly] public DynamicBuffer<Stage> StageBuffer;
+            public Entity ScoreEntity;
+            public int CurrentScore;
 
             private void Execute(Entity entity, ref Asteroid asteroid, ref Speed speed, ref Direction direction,
                 ref PhysicsRadius physicsRadius, ref LocalTransform transform)
             {
                 CommandBuffer.RemoveComponent<DamageEvent>(entity);
-
                 var stage = StageBuffer[asteroid.CurrentStage];
 
-                // Send Score of the current Stage
-                var score = stage.Score;
+                // Update score
+                CurrentScore += stage.Score;
+                CommandBuffer.SetComponent(ScoreEntity, new Score {Value = CurrentScore});
+                
                 // Increase Stage
                 asteroid.CurrentStage++;
 

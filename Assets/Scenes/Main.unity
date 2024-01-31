@@ -868,6 +868,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameUI
       objectReference: {fileID: 0}
+    - target: {fileID: 496847577084307270, guid: 096b0606233d4a24087861c406b8c356,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245104737358598078, guid: 096b0606233d4a24087861c406b8c356,
+        type: 3}
+      propertyPath: lifeIconTemplate
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: c1c26f6dd91263c41853103388d0890a,
+        type: 3}
     - target: {fileID: 4490076091596339747, guid: 096b0606233d4a24087861c406b8c356,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1001,6 +1012,6 @@ SceneRoots:
   - {fileID: 1259161577}
   - {fileID: 2051675414}
   - {fileID: 5358144242540739740}
+  - {fileID: 1774327117}
   - {fileID: 539421726}
   - {fileID: 1248972210}
-  - {fileID: 1774327117}

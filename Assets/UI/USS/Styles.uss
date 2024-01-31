@@ -48,3 +48,8 @@
 .score-label {
     font-size: 30px;
 }
+
+.score-value {
+    font-size: 30px;
+    -unity-font-style: bold;
+}

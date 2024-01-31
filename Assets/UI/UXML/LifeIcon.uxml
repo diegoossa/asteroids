@@ -1,0 +1,3 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="life-background" style="width: 32px; height: 32px; background-image: url(&apos;project://database/Assets/Art/Textures/ship.png?fileID=21300000&amp;guid=6993776d2fb3a2647a3acffe8d66a22f&amp;type=3#ship&apos;);" />
+</ui:UXML>

@@ -27,23 +27,28 @@ namespace DO.Asteroids.Hybrid
                     .WithInitialSize(4)
                     .FromComponentInNewPrefab(_settings.ExplosionPrefab)
                     .UnderTransformGroup("VFX"));
+            
+            Container.BindFactory<SpawnVFX, SpawnVFX.Factory>()
+                .FromPoolableMemoryPool<SpawnVFX, SpawnVFXPool>(poolBinder => poolBinder
+                    .WithInitialSize(1)
+                    .FromComponentInNewPrefab(_settings.SpawnVFXPrefab)
+                    .UnderTransformGroup("VFX"));
         }
 
         private void InstallSignals()
         {
             SignalBusInstaller.Install(Container);
             Container.DeclareSignal<StartGameSignal>();
-            Container.BindInterfacesAndSelfTo<HybridSignalBus>().AsSingle();
         }
 
         [Serializable]
         public class Settings
         {
             public GameObject ExplosionPrefab;
+            public GameObject SpawnVFXPrefab;
         }
 
-        private class ExplosionPool : MonoPoolableMemoryPool<IMemoryPool, Explosion>
-        {
-        }
+        private class ExplosionPool : MonoPoolableMemoryPool<IMemoryPool, Explosion> { }
+        private class SpawnVFXPool : MonoPoolableMemoryPool<IMemoryPool, SpawnVFX> { }
     }
 }

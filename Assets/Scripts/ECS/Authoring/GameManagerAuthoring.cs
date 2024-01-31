@@ -5,12 +5,10 @@ namespace DO.Asteroids
 {
     public class GameManagerAuthoring : MonoBehaviour
     {
-        [Header("Ship Spawn Settings")]
-        public GameObject ShipPrefab;
+        [Header("Ship Spawn Settings")] public GameObject ShipPrefab;
         public float TimeToSpawn;
         public bool ShouldSpawn;
-        [Header("Lives")]
-        public int InitialLives;
+        [Header("Lives")] public int InitialLives;
 
         public class GameManagerBaker : Baker<GameManagerAuthoring>
         {
@@ -24,9 +22,17 @@ namespace DO.Asteroids
                     ShouldSpawn = authoring.ShouldSpawn,
                 });
                 AddComponent(entity, new Lives
-                    {InitialLives = authoring.InitialLives, CurrentLives = authoring.InitialLives});
-                AddComponent(entity, new Score());
+                {
+                    InitialLives = authoring.InitialLives,
+                    CurrentLives = authoring.InitialLives,
+                    LastLives = -1
+                });
+                AddComponent(entity, new Score
+                {
+                    Value = 0, 
+                    LastScore = -1
+                });
             }
         }
     }
-} 
+}

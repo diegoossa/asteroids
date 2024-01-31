@@ -1,6 +1,7 @@
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Mathematics;
 
 namespace DO.Asteroids
 {
@@ -18,6 +19,7 @@ namespace DO.Asteroids
 
             state.RequireForUpdate(_damagedShipQuery);
             state.RequireForUpdate<Ship>();
+            state.RequireForUpdate<Lives>();
         }
 
         [BurstCompile]
@@ -25,9 +27,23 @@ namespace DO.Asteroids
         {
             var shipEntity = SystemAPI.GetSingletonEntity<Ship>();
             state.EntityManager.DestroyEntity(shipEntity);
-
+            
+            // Update lives
+            var lives = SystemAPI.GetSingletonRW<Lives>();
+            var newLives = math.max(0, lives.ValueRO.CurrentLives - 1);
+            lives.ValueRW.CurrentLives = newLives;
+            
             var gameManager = SystemAPI.GetSingletonRW<GameManager>();
-            gameManager.ValueRW.ShouldSpawn = true;
+            
+            // Game Over
+            if(newLives == 0)
+            {
+                
+            }
+            else
+            {
+                gameManager.ValueRW.ShouldSpawn = true;
+            }
         }
     }
 }
