@@ -23,6 +23,14 @@ namespace DO.Asteroids
                 {
                     HybridSignalBus.Instance.OnLivesChange?.Invoke(lives.ValueRO.CurrentLives);
                 }
+
+                if (lives.ValueRO.CurrentLives <= 0)
+                {
+                    if (HybridSignalBus.Instance != null)
+                    {
+                        HybridSignalBus.Instance.OnGameOver?.Invoke();
+                    }
+                }
             }
         }
     }

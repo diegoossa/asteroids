@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6456349993160321534}
   - component: {fileID: 5640741822358997188}
   - component: {fileID: 4245104737358598078}
+  - component: {fileID: 5964216584975074206}
   m_Layer: 5
   m_Name: GameUI
   m_TagString: Untagged
@@ -73,5 +74,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15c3585d0fd342f7b07b3471bab0f282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeIconTemplate: {fileID: 9197481963319205126, guid: c1c26f6dd91263c41853103388d0890a,
+    type: 3}
+--- !u!114 &5964216584975074206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496847577084307270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d6ee1c29a744b2b544277403e101c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

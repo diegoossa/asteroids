@@ -14,7 +14,8 @@ namespace DO.Asteroids.Hybrid
         public Action OnSpawnShip;
         public Action<int> OnScoreChange;
         public Action<int> OnLivesChange;
-        public Action<Vector2> OnSpawnExplosion;        
+        public Action<Vector2> OnSpawnExplosion;
+        public Action OnGameOver;
 
         private void Awake()
         {

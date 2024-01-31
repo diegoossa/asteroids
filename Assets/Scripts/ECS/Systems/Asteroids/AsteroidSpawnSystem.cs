@@ -74,7 +74,7 @@ namespace DO.Asteroids
                     CommandBuffer.SetComponent(asteroidEntity, new RotationSpeed {Value = StageSettings.RotationSpeed});
                     CommandBuffer.SetComponent(asteroidEntity, new Direction {Value = Rnd.NextFloat2Direction()});
                     CommandBuffer.SetComponent(asteroidEntity, new Speed {Value = StageSettings.Speed});
-                    CommandBuffer.SetComponent(asteroidEntity, new PhysicsRadius { Value = StageSettings.Scale });
+                    CommandBuffer.SetComponent(asteroidEntity, new PhysicsRadius { Value = StageSettings.Scale / 2f });
                 }
             }
         }

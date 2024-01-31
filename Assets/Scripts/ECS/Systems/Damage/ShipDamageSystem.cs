@@ -32,18 +32,12 @@ namespace DO.Asteroids
             var lives = SystemAPI.GetSingletonRW<Lives>();
             var newLives = math.max(0, lives.ValueRO.CurrentLives - 1);
             lives.ValueRW.CurrentLives = newLives;
+
+            if (newLives <= 0) 
+                return;
             
             var gameManager = SystemAPI.GetSingletonRW<GameManager>();
-            
-            // Game Over
-            if(newLives == 0)
-            {
-                
-            }
-            else
-            {
-                gameManager.ValueRW.ShouldSpawn = true;
-            }
+            gameManager.ValueRW.ShouldSpawn = true;
         }
     }
 }

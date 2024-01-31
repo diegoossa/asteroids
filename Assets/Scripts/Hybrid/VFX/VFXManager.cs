@@ -28,7 +28,7 @@ namespace DO.Asteroids.Hybrid
         
         private void SpawnInstantiateVFX()
         {
-            var spawnVFX = _spawnVFXFactory.Create();
+            _spawnVFXFactory.Create();
         }
     }
 }

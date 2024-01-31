@@ -17,4 +17,11 @@
             <ui:Button text="EXIT" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exit-button" class="button" />
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:VisualElement name="game-over__container" class="full-screen align-center" style="background-color: rgba(0, 0, 0, 0.7); display: none;">
+        <ui:Label tabindex="-1" text="GAME OVER" parse-escape-sequences="true" display-tooltip-when-elided="true" name="game-over-label" class="menu-title" />
+        <ui:VisualElement name="game-over-score-container" style="align-items: center; display: flex;">
+            <ui:Label tabindex="-1" text="YOUR SCORE IS AWESOME&#10;PLEASE ENTER YOUR INITIALS" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 30px; -unity-text-align: upper-center;" />
+            <ui:TextField picking-mode="Ignore" value="___" name="initials-text-field" max-length="3" keyboard-type="ASCIICapable" class="initials-text-fields" style="width: 160px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
 </ui:UXML>
