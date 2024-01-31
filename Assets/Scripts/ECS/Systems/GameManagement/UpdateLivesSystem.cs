@@ -28,7 +28,8 @@ namespace DO.Asteroids
                 {
                     if (HybridSignalBus.Instance != null)
                     {
-                        HybridSignalBus.Instance.OnGameOver?.Invoke();
+                        // Invoke GameOver
+                        HybridSignalBus.Instance.OnGameStateChange?.Invoke(GameState.GameOver);
                     }
                 }
             }

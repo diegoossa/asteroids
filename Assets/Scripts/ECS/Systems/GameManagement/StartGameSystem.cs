@@ -14,7 +14,7 @@ namespace DO.Asteroids
 
         public void OnStartRunning(ref SystemState state)
         {
-            if(HybridSignalBus.Instance != null)
+            if (HybridSignalBus.Instance != null)
                 HybridSignalBus.Instance.OnGameStateChange += OnStartGame;
         }
 
@@ -29,6 +29,8 @@ namespace DO.Asteroids
             }
         }
 
-        public void OnStopRunning(ref SystemState state) { }
+        public void OnStopRunning(ref SystemState state)
+        {
+        }
     }
 }

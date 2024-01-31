@@ -8,6 +8,7 @@ namespace DO.Asteroids
         public int NumAsteroids;
         public uint RandomSeed;
         public bool ShouldSpawn;
+        public bool ResetAsteroids;
     }
 
     public struct Asteroid : IComponentData

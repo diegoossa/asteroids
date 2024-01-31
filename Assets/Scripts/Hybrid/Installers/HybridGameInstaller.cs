@@ -12,7 +12,6 @@ namespace DO.Asteroids.Hybrid
         {
             InstallFactories();
             InstallManagers();
-            InstallSignals();
         }
 
         private void InstallManagers()
@@ -33,12 +32,6 @@ namespace DO.Asteroids.Hybrid
                     .WithInitialSize(1)
                     .FromComponentInNewPrefab(_settings.SpawnVFXPrefab)
                     .UnderTransformGroup("VFX"));
-        }
-
-        private void InstallSignals()
-        {
-            SignalBusInstaller.Install(Container);
-            Container.DeclareSignal<StartGameSignal>();
         }
 
         [Serializable]

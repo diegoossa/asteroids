@@ -11,6 +11,7 @@ namespace DO.Asteroids.Hybrid
         private Label _gameOverLabel;
         private VisualElement _scoreContainer;
         private TextField _initialsTextField;
+        private Button _submitScoreButton;
 
         private void OnEnable()
         {
@@ -19,6 +20,7 @@ namespace DO.Asteroids.Hybrid
             _gameOverLabel = root.Q<Label>("game-over-label");
             _scoreContainer = root.Q<VisualElement>("game-over-score-container");
             _initialsTextField = root.Q<TextField>("initials-text-field");
+            _submitScoreButton = root.Q<Button>("submit-score-button");
         }
 
         private void Start()
@@ -35,20 +37,32 @@ namespace DO.Asteroids.Hybrid
         {
             if (HybridSignalBus.Instance != null)
             {
-                HybridSignalBus.Instance.OnGameOver += OnGameOver;
+                HybridSignalBus.Instance.OnGameStateChange += OnGameStateChange;
             }
+            
+            _submitScoreButton.RegisterCallback<ClickEvent>(ev =>
+            {
+                // TODO: Submit score to the server 
+                HybridSignalBus.Instance.OnGameStateChange?.Invoke(GameState.Menu);
+                
+                _gameOverContainer.style.display = DisplayStyle.None;
+                _gameOverLabel.style.display = DisplayStyle.Flex;
+            });
         }
 
         private void UnregisterCallbacks()
         {
-            HybridSignalBus.Instance.OnGameOver -= OnGameOver;
+            HybridSignalBus.Instance.OnGameStateChange -= OnGameStateChange;
         }
 
-        private void OnGameOver()
+        private void OnGameStateChange(GameState gameState)
         {
-            _gameOverContainer.style.display = DisplayStyle.Flex;
-            _scoreContainer.style.display = DisplayStyle.None;
-            StartCoroutine(ShowScoreContainer());
+            if (gameState == GameState.GameOver)
+            {
+                _gameOverContainer.style.display = DisplayStyle.Flex;
+                _scoreContainer.style.display = DisplayStyle.None;
+                StartCoroutine(ShowScoreContainer());
+            }
         }
 
         private IEnumerator ShowScoreContainer()
