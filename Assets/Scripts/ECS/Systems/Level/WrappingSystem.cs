@@ -41,21 +41,21 @@ namespace DO.Asteroids
         {
             var position = transform.Position;
 
-            if (position.x < LevelBounds.x - physicsRadius.Radius)
+            if (position.x < LevelBounds.x - physicsRadius.Value)
             {
-                position.x = LevelBounds.y + physicsRadius.Radius;
+                position.x = LevelBounds.y + physicsRadius.Value;
             }
-            else if (position.x > LevelBounds.y + physicsRadius.Radius)
+            else if (position.x > LevelBounds.y + physicsRadius.Value)
             {
-                position.x = LevelBounds.x - physicsRadius.Radius;
+                position.x = LevelBounds.x - physicsRadius.Value;
             }
-            else if (position.y < LevelBounds.z - physicsRadius.Radius)
+            else if (position.y < LevelBounds.z - physicsRadius.Value)
             {
-                position.y = LevelBounds.w + physicsRadius.Radius;
+                position.y = LevelBounds.w + physicsRadius.Value;
             } 
-            else if (position.y > LevelBounds.w + physicsRadius.Radius)
+            else if (position.y > LevelBounds.w + physicsRadius.Value)
             {
-                position.y = LevelBounds.z - physicsRadius.Radius;
+                position.y = LevelBounds.z - physicsRadius.Value;
             }
             
             transform.Position = position;

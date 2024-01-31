@@ -28,14 +28,14 @@ namespace DO.Asteroids
     /// </summary>
     public struct PhysicsRadius : IComponentData
     {
-        public float Radius;
+        public float Value;
     }
 
     /// <summary>
     /// Mark entities that should be wrapped around the screen
     /// </summary>
     public struct Wrap : IComponentData { }
-    
+
     public struct Enemy : IComponentData { }
 
     public struct DamageEvent : IComponentData

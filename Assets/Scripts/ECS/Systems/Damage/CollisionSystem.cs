@@ -57,13 +57,13 @@ namespace DO.Asteroids
                 
             private void Execute(Entity entity)
             {
-                var enemyBounds = PhysicsBoundsLookup[entity].Radius;
+                var enemyBounds = PhysicsBoundsLookup[entity].Value;
                 var enemyPosition = LocalTransformLookup[entity].Position.xy;
                 
                 // Check if bullet is colliding with enemy
                 foreach (var bullet in Bullets)
                 {
-                    var bulletBounds = PhysicsBoundsLookup[bullet].Radius;
+                    var bulletBounds = PhysicsBoundsLookup[bullet].Value;
                     var bulletPosition = LocalTransformLookup[bullet].Position.xy;
                     
                     if (Intersect(enemyBounds, bulletBounds, enemyPosition, bulletPosition))
@@ -74,7 +74,7 @@ namespace DO.Asteroids
                 }
                 
                 // Check if ship is colliding with enemy
-                var shipBounds = PhysicsBoundsLookup[Ship].Radius;
+                var shipBounds = PhysicsBoundsLookup[Ship].Value;
                 var shipPosition = LocalTransformLookup[Ship].Position.xy;
                 if (Intersect(enemyBounds, shipBounds, enemyPosition, shipPosition))
                 {

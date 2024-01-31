@@ -97,7 +97,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Radius: 0.5
-  Stage: 0
-  MaxStage: 2
-  StageSpeedMultiplier: 3
-  StageScaleMultiplier: 0.6
+  Stages:
+  - Speed: 0.25
+    Scale: 1
+    Score: 20
+  - Speed: 0.75
+    Scale: 0.5
+    Score: 50
+  - Speed: 1.25
+    Scale: 0.25
+    Score: 100

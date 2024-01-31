@@ -15,7 +15,6 @@ namespace DO.Asteroids
             state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
             state.RequireForUpdate<LevelBounds>();
             state.RequireForUpdate<AsteroidRandomSpawner>();
-            state.RequireForUpdate<AsteroidSettings>();
         }
 
         [BurstCompile]
@@ -28,11 +27,9 @@ namespace DO.Asteroids
             var commandBuffer = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>()
                 .CreateCommandBuffer(state.WorldUnmanaged);
             var levelBounds = SystemAPI.GetSingleton<LevelBounds>();
-
-            var settings = SystemAPI.GetSingleton<AsteroidSettings>();
             var random = new Random(spawner.ValueRO.RandomSeed);
-
             var avoidPositions = new NativeList<float3>(Allocator.TempJob) {float3.zero};
+            var initialStage = SystemAPI.GetSingletonBuffer<Stage>()[0];
 
             var jobHandle = new SpawnAsteroidsJob
             {
@@ -42,7 +39,7 @@ namespace DO.Asteroids
                 Bounds = levelBounds.Bounds,
                 Rnd = random,
                 AvoidPositions = avoidPositions,
-                Settings = settings
+                StageSettings = initialStage
             };
 
             state.Dependency = jobHandle.Schedule(state.Dependency);
@@ -61,9 +58,9 @@ namespace DO.Asteroids
         public Entity AsteroidPrefab;
         public int NumAsteroids;
         public float4 Bounds;
+        public Stage StageSettings;
         public Random Rnd;
         public NativeList<float3> AvoidPositions;
-        public AsteroidSettings Settings;
 
         public void Execute()
         {
@@ -71,12 +68,13 @@ namespace DO.Asteroids
             {
                 var asteroidEntity = CommandBuffer.Instantiate(AsteroidPrefab);
 
-                if (TryGetValidPosition(ref Rnd, ref AvoidPositions, 5, Settings.Radius, out var randomPosition))
+                if (TryGetValidPosition(StageSettings.Scale, out var randomPosition))
                 {
-                    CommandBuffer.SetComponent(asteroidEntity, LocalTransform.FromPositionRotation(randomPosition, Rnd.NextQuaternionRotation()));
-                    CommandBuffer.SetComponent(asteroidEntity, new RotationSpeed {Value = Settings.RotationSpeed});
+                    CommandBuffer.SetComponent(asteroidEntity, LocalTransform.FromPositionRotationScale(randomPosition, Rnd.NextQuaternionRotation(), StageSettings.Scale));
+                    CommandBuffer.SetComponent(asteroidEntity, new RotationSpeed {Value = StageSettings.RotationSpeed});
                     CommandBuffer.SetComponent(asteroidEntity, new Direction {Value = Rnd.NextFloat2Direction()});
-                    CommandBuffer.SetComponent(asteroidEntity, new Speed {Value = Settings.Speed});
+                    CommandBuffer.SetComponent(asteroidEntity, new Speed {Value = StageSettings.Speed});
+                    CommandBuffer.SetComponent(asteroidEntity, new PhysicsRadius { Value = StageSettings.Scale });
                 }
             }
         }
@@ -84,17 +82,14 @@ namespace DO.Asteroids
         /// <summary>
         /// Try to get a valid position for the asteroid
         /// </summary>
-        private bool TryGetValidPosition(ref Random random, ref NativeList<float3> avoidPositions,
-            int maxAttempts, float radius, out float3 position)
+        private bool TryGetValidPosition(float radius, out float3 position, int maxAttempts = 5)
         {
-            position = float3.zero;
             var minDistance = radius + radius;
-
             for (var attempt = 0; attempt < maxAttempts; attempt++)
             {
-                position = new float3(random.NextFloat(Bounds.x, Bounds.y), random.NextFloat(Bounds.z, Bounds.w), 0);
+                position = new float3(Rnd.NextFloat(Bounds.x, Bounds.y), Rnd.NextFloat(Bounds.z, Bounds.w), 0);
                 var valid = true;
-                foreach (var avoidPosition in avoidPositions)
+                foreach (var avoidPosition in AvoidPositions)
                 {
                     var distance = math.distance(position, avoidPosition);
                     if (distance < minDistance)
@@ -107,11 +102,13 @@ namespace DO.Asteroids
                 if (valid)
                 {
                     // If we find a valid position, add it to the list of positions to avoid
-                    avoidPositions.Add(position);
+                    AvoidPositions.Add(position);
                     return true;
                 }
             }
-
+            
+            // If we can't find a valid position, just return a random position
+            position = new float3(Rnd.NextFloat(Bounds.x, Bounds.y), Rnd.NextFloat(Bounds.z, Bounds.w), 0);
             return false;
         }
     }

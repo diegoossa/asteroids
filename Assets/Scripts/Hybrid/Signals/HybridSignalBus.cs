@@ -1,5 +1,4 @@
 ﻿using System;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace DO.Asteroids.Hybrid
@@ -12,7 +11,7 @@ namespace DO.Asteroids.Hybrid
         public static HybridSignalBus Instance { get; private set; }
         
         public Action<GameState> OnGameStateChange;
-        public Action<float2> OnSpawnExplosion;
+        public Action<Vector2> OnSpawnExplosion;
 
         private void Awake()
         {

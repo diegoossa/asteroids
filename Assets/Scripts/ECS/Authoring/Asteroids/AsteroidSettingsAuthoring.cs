@@ -1,29 +1,42 @@
+using System;
 using Unity.Entities;
-using Unity.Entities.UI;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace DO.Asteroids
 {
+    
+    
     public class AsteroidSettingsAuthoring : MonoBehaviour
     {
-        [MinMax(0, 100)]
-        public float Speed;
-        public float RotationSpeed;
-        public float Radius = 0.5f;
+        [Serializable]
+        public struct StageSettings
+        {
+            public float Speed;
+            public float Scale;
+            public float RotationSpeed;
+            public int Score;
+        }
+        
+        public StageSettings[] Stages;
 
         public class AsteroidSettingsBaker : Baker<AsteroidSettingsAuthoring>
         {
             public override void Bake(AsteroidSettingsAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.None);
-                AddComponent(entity,
-                    new AsteroidSettings
+                
+                // Add Stage Settings
+                var stageBuffer = AddBuffer<Stage>(entity);
+                foreach (var stage in authoring.Stages)
+                {
+                    stageBuffer.Add(new Stage
                     {
-                        Speed = authoring.Speed,
-                        RotationSpeed = authoring.RotationSpeed,
-                        Radius = authoring.Radius,
+                        Speed = stage.Speed,
+                        Scale = stage.Scale,
+                        RotationSpeed = stage.RotationSpeed,
+                        Score = stage.Score
                     });
+                }
             }
         }
     }

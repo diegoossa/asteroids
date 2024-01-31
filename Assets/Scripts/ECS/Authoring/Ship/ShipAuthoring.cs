@@ -22,7 +22,7 @@ namespace DO.Asteroids
                     Drag = authoring.Drag
                 });
                 AddComponent(entity, new PlayerInput());
-                AddComponent(entity, new PhysicsRadius {Radius = authoring.Radius});
+                AddComponent(entity, new PhysicsRadius {Value = authoring.Radius});
                 AddComponent(entity, new Wrap());
                 AddComponent(entity, new Velocity());
             }

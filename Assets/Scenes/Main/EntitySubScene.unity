@@ -155,6 +155,7 @@ MonoBehaviour:
   ShipPrefab: {fileID: 7890276549645126537, guid: c6090d219932b9348840dd634cc6a0b0,
     type: 3}
   TimeToSpawn: 1
+  ShouldSpawn: 0
   InitialLives: 3
 --- !u!4 &243279584
 Transform:
@@ -218,8 +219,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AsteroidPrefab: {fileID: 3386189613982008513, guid: 57241843b3aad3d4782e79dfe2edb165,
     type: 3}
-  NumAsteroids: 8
-  RandomSeed: 777
+  NumAsteroids: 4
+  RandomSeed: 42
   ShouldSpawn: 1
 --- !u!114 &537438762
 MonoBehaviour:
@@ -233,9 +234,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2a3bf0a8ae4849a58bbdc5d67942cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.25
-  RotationSpeed: 7
-  Radius: 0.5
+  Stages:
+  - Speed: 0.25
+    Scale: 1.5
+    RotationSpeed: 10
+    Score: 20
+  - Speed: 1
+    Scale: 0.75
+    RotationSpeed: 15
+    Score: 50
+  - Speed: 2
+    Scale: 0.4
+    RotationSpeed: 20
+    Score: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

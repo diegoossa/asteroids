@@ -9,7 +9,7 @@ namespace DO.Asteroids.Hybrid
         [SerializeField] private ParticleSystem vfx;
         private float _startTime;
         private IMemoryPool _pool;
-
+        
         public void Update()
         {
             if (Time.realtimeSinceStartup - _startTime > lifeTime)
@@ -17,14 +17,14 @@ namespace DO.Asteroids.Hybrid
                 _pool.Despawn(this);
             }
         }
-
+        
         public void OnDespawned() { }
-
+        
         public void OnSpawned(IMemoryPool pool)
         {
-            //vfx.Clear();
+            vfx.Clear();
             vfx.Play();
-
+        
             _startTime = Time.realtimeSinceStartup;
             _pool = pool;
         }

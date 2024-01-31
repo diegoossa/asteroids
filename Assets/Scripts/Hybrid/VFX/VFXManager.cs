@@ -1,5 +1,4 @@
-﻿using Unity.Mathematics;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace DO.Asteroids.Hybrid
@@ -18,10 +17,10 @@ namespace DO.Asteroids.Hybrid
             HybridSignalBus.Instance.OnSpawnExplosion += SpawnExplosion;
         }
 
-        private void SpawnExplosion(float2 position)
+        private void SpawnExplosion(Vector2 position)
         {
             var explosion = _explosionFactory.Create();
-            explosion.transform.position = new Vector3(position.x, position.y, 0);
+            explosion.transform.position = new Vector3(position.x, position.y, -1f);
         }
     }
 }
