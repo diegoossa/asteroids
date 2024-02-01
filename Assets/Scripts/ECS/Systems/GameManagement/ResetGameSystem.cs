@@ -1,5 +1,4 @@
 using DO.Asteroids.Hybrid;
-using Unity.Burst;
 using Unity.Entities;
 
 namespace DO.Asteroids
@@ -8,10 +7,9 @@ namespace DO.Asteroids
     {
         public void OnStartRunning(ref SystemState state)
         {
-            HybridSignalBus.Instance.OnGameStateChange -= OnResetGame;
+            HybridSignalBus.Instance.OnGameStateChange += OnResetGame;
         }
 
-        [BurstCompile]
         private void OnResetGame(GameState gameState)
         {
             if (gameState == GameState.Menu)
@@ -25,6 +23,9 @@ namespace DO.Asteroids
                 
                 var asteroidSpawner = SystemAPI.GetSingletonRW<AsteroidSpawner>();
                 asteroidSpawner.ValueRW.ResetAsteroids = true;
+                
+                var difficulty = SystemAPI.GetSingletonRW<DifficultyLevel>();
+                difficulty.ValueRW.CurrentLevel = 0;
             }
         }
         

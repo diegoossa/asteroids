@@ -36,26 +36,24 @@ namespace DO.Asteroids.Hybrid
         private void RegisterCallbacks()
         {
             if (HybridSignalBus.Instance != null)
-            {
                 HybridSignalBus.Instance.OnGameStateChange += OnGameStateChange;
-            }
 
-            _submitScoreButton.RegisterCallback<ClickEvent>(ev =>
-            {
-                // TODO: Submit score to the server 
+            _submitScoreButton.RegisterCallback<ClickEvent>(OnSubmitScore);
+        }
+
+        private void OnSubmitScore(ClickEvent evt)
+        {
+            // TODO: Submit score to the server 
+            if (HybridSignalBus.Instance != null)
                 HybridSignalBus.Instance.OnGameStateChange?.Invoke(GameState.Menu);
 
-                _gameOverContainer.style.display = DisplayStyle.None;
-                _gameOverLabel.style.display = DisplayStyle.Flex;
-            });
+            _gameOverContainer.style.display = DisplayStyle.None;
+            _gameOverLabel.style.display = DisplayStyle.Flex;
         }
 
         private void UnregisterCallbacks()
         {
-            if (HybridSignalBus.Instance != null)
-            {
-                HybridSignalBus.Instance.OnGameStateChange -= OnGameStateChange;
-            }
+            HybridSignalBus.Instance.OnGameStateChange -= OnGameStateChange;
         }
 
         private void OnGameStateChange(GameState gameState)

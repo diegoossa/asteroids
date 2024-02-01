@@ -18,19 +18,18 @@ namespace DO.Asteroids.Hybrid
             _playButton = root.Q<Button>("play-button");
             _highScoresButton = root.Q<Button>("high-scores-button");
             _exitButton = root.Q<Button>("exit-button");
-
+        }
+        
+        private void Start()
+        {
             RegisterCallbacks();
         }
-
-        #region Events
 
         private void RegisterCallbacks()
         {
             _playButton.RegisterCallback<ClickEvent>(OnPlayButtonClicked);
             _exitButton.RegisterCallback<ClickEvent>(OnExitButtonClicked);
-            
-            if(HybridSignalBus.Instance != null)
-                HybridSignalBus.Instance.OnGameStateChange += OnGameStateChange;
+            HybridSignalBus.Instance.OnGameStateChange += OnGameStateChange;
         }
 
         private void OnExitButtonClicked(ClickEvent evt)
@@ -45,8 +44,8 @@ namespace DO.Asteroids.Hybrid
 
         private void OnPlayButtonClicked(ClickEvent evt)
         {
-            _menuContainer.style.display = DisplayStyle.None;
             HybridSignalBus.Instance.OnGameStateChange?.Invoke(GameState.Play);
+            _menuContainer.style.display = DisplayStyle.None;
         }
         
         private void OnGameStateChange(GameState gameState)
@@ -65,8 +64,7 @@ namespace DO.Asteroids.Hybrid
         private void UnregisterCallbacks()
         {
             _playButton.UnregisterCallback<ClickEvent>(OnPlayButtonClicked);
+            HybridSignalBus.Instance.OnGameStateChange -= OnGameStateChange;
         }
-
-        #endregion
     }
 }
