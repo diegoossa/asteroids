@@ -16,8 +16,8 @@ namespace DO.Asteroids.Hybrid
 
         public void Initialize()
         {
-            HybridSignalBus.Instance.OnSpawnExplosion += SpawnExplosion;
-            HybridSignalBus.Instance.OnSpawnShip += SpawnInstantiateVFX;
+            HybridSignalBus.OnSpawnExplosion += SpawnExplosion;
+            HybridSignalBus.OnSpawnShip += SpawnInstantiateVFX;
         }
 
         private void SpawnExplosion(Vector2 position)

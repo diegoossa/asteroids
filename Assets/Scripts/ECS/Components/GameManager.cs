@@ -8,7 +8,6 @@ namespace DO.Asteroids
         public float TimeToSpawn;
         public float CurrentTimer;
         public bool ShouldSpawn;
-        public GameState GameState;
     }
 
     public struct Lives : IComponentData
@@ -17,19 +16,15 @@ namespace DO.Asteroids
         public int LastLives;
         public int CurrentLives;
     }
-    
+
     public struct Score : IComponentData
     {
         public int Value;
         public int LastScore;
     }
-    
-    public enum GameState
+
+    public struct DifficultyLevel : IComponentData
     {
-        None,
-        Menu,
-        Play,
-        Pause,
-        GameOver
+        
     }
 }

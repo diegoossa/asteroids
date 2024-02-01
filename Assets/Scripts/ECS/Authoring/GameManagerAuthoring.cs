@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// Authoring component for the GameManager.
+    /// </summary>
     public class GameManagerAuthoring : MonoBehaviour
     {
         [Header("Ship Spawn Settings")] public GameObject ShipPrefab;

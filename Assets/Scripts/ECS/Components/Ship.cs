@@ -7,7 +7,6 @@ namespace DO.Asteroids
         public float ThrustForce;
         public float TurnTorque;
         public float Drag;
-        public Entity Exhaust;
     }
     
     public struct ShipExhaust : IComponentData { }

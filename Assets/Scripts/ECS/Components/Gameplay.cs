@@ -26,7 +26,7 @@ namespace DO.Asteroids
     /// <summary>
     /// For simplicity, we are not using the Unity Physics package, but we can have a super simplified physics circle shape
     /// </summary>
-    public struct PhysicsRadius : IComponentData
+    public struct Radius : IComponentData
     {
         public float Value;
     }
@@ -38,9 +38,5 @@ namespace DO.Asteroids
 
     public struct Enemy : IComponentData { }
 
-    public struct DamageEvent : IComponentData
-    {
-        public Entity Source;
-        public float2 Position;
-    }
+    public struct DamageEvent : IComponentData { }
 }

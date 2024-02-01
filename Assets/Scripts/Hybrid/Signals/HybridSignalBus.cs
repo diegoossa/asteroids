@@ -4,28 +4,23 @@ using UnityEngine;
 namespace DO.Asteroids.Hybrid
 {
     /// <summary>
-    /// HybridSignalBus is used to communicate between ECS and Hybrid Components
+    /// Public static delegates to communicate between ECS and Hybrid systems (MonoBehaviours)
     /// </summary>
-    public class HybridSignalBus : MonoBehaviour
+    public static class HybridSignalBus
     {
-        public static HybridSignalBus Instance { get; private set; }
-        
-        public Action<GameState> OnGameStateChange;
-        public Action OnSpawnShip;
-        public Action<int> OnScoreChange;
-        public Action<int> OnLivesChange;
-        public Action<Vector2> OnSpawnExplosion;
-
-        private void Awake()
-        {
-            if (Instance != null && Instance != this) 
-            { 
-                Destroy(this); 
-            } 
-            else 
-            { 
-                Instance = this; 
-            } 
-        }
+        public static Action<GameState> OnGameStateChange;
+        public static Action OnSpawnShip;
+        public static Action<int> OnScoreChange;
+        public static Action<int> OnLivesChange;
+        public static Action<Vector2> OnSpawnExplosion;
+    }
+    
+    public enum GameState
+    {
+        None,
+        Menu,
+        Play,
+        Pause,
+        GameOver
     }
 }

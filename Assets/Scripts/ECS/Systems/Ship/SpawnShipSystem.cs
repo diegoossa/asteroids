@@ -1,14 +1,13 @@
 ﻿using DO.Asteroids.Hybrid;
 using Unity.Burst;
 using Unity.Entities;
-using UnityEngine;
 
 namespace DO.Asteroids
 {
     public partial struct SpawnShipSystem : ISystem
     {
         private bool _shouldSpawnCached;
-        
+
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
@@ -24,11 +23,10 @@ namespace DO.Asteroids
 
             if (_shouldSpawnCached != gameManager.ValueRO.ShouldSpawn)
             {
-                if(HybridSignalBus.Instance != null)
-                    HybridSignalBus.Instance.OnSpawnShip?.Invoke();
+                HybridSignalBus.OnSpawnShip?.Invoke();
             }
-            
-            if(gameManager.ValueRO.CurrentTimer < gameManager.ValueRO.TimeToSpawn)
+
+            if (gameManager.ValueRO.CurrentTimer < gameManager.ValueRO.TimeToSpawn)
             {
                 gameManager.ValueRW.CurrentTimer += SystemAPI.Time.DeltaTime;
             }
@@ -38,7 +36,7 @@ namespace DO.Asteroids
                 gameManager.ValueRW.CurrentTimer = 0f;
                 gameManager.ValueRW.ShouldSpawn = false;
             }
-            
+
             _shouldSpawnCached = gameManager.ValueRO.ShouldSpawn;
         }
     }

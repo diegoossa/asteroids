@@ -1,9 +1,11 @@
-using System;
 using Unity.Entities;
 using UnityEngine;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// The AsteroidAuthoring class is used to bake an asteroid entity.
+    /// </summary>
     public class AsteroidAuthoring : MonoBehaviour
     {
         public class AsteroidBaker : Baker<AsteroidAuthoring>
@@ -15,10 +17,9 @@ namespace DO.Asteroids
                 AddComponent(entity, new Speed());
                 AddComponent(entity, new Direction());
                 AddComponent(entity, new RotationSpeed());
-                AddComponent(entity, new PhysicsRadius());
+                AddComponent(entity, new Radius());
                 AddComponent(entity, new Enemy());
                 AddComponent(entity, new Wrap());
-                
             }
         }
     }

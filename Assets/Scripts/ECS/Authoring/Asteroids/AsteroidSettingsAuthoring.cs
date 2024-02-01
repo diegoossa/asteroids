@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace DO.Asteroids
 {
-    
-    
+    /// <summary>
+    /// The AsteroidSettingsAuthoring class is used to bake asteroid settings for each stage.
+    /// </summary>
     public class AsteroidSettingsAuthoring : MonoBehaviour
     {
         [Serializable]

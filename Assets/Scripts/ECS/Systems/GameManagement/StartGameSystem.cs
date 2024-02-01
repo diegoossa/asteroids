@@ -14,8 +14,8 @@ namespace DO.Asteroids
 
         public void OnStartRunning(ref SystemState state)
         {
-            if (HybridSignalBus.Instance != null)
-                HybridSignalBus.Instance.OnGameStateChange += OnStartGame;
+            if (HybridSignalBus.OnGameStateChange != null)
+                HybridSignalBus.OnGameStateChange += OnStartGame;
         }
 
         [BurstCompile]
@@ -25,7 +25,6 @@ namespace DO.Asteroids
             {
                 var gameManager = SystemAPI.GetSingletonRW<GameManager>();
                 gameManager.ValueRW.ShouldSpawn = true;
-                gameManager.ValueRW.GameState = GameState.Play;
             }
         }
 

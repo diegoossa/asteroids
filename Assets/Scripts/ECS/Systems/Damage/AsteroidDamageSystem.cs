@@ -51,7 +51,7 @@ namespace DO.Asteroids
             public int CurrentScore;
 
             private void Execute(Entity entity, ref Asteroid asteroid, ref Speed speed, ref Direction direction,
-                ref PhysicsRadius physicsRadius, ref LocalTransform transform)
+                ref Radius radius, ref LocalTransform transform)
             {
                 CommandBuffer.RemoveComponent<DamageEvent>(entity);
                 var stage = StageBuffer[asteroid.CurrentStage];
@@ -74,7 +74,7 @@ namespace DO.Asteroids
                     var nextStage = StageBuffer[asteroid.CurrentStage];
                     speed.Value = nextStage.Speed;
                     direction.Value = Rnd.NextFloat2Direction();
-                    physicsRadius.Value = nextStage.Scale;
+                    radius.Value = nextStage.Scale;
                     transform = LocalTransform.FromPositionRotationScale(transform.Position, transform.Rotation,
                         nextStage.Scale);
 

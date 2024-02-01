@@ -7,7 +7,7 @@ namespace DO.Asteroids
     /// <summary>
     /// This is a MonoBehaviour that will be used to create an entity with a LevelBounds component.
     /// </summary>
-    public class LevelBoundsAuthoring : MonoBehaviour
+    public class CreateLevelBounds : MonoBehaviour
     {
         [SerializeField] private Camera mainCamera;
 
@@ -21,8 +21,6 @@ namespace DO.Asteroids
             });
             
             // TODO: Change LevelBounds when the Game Window is resized.
-            // Destroy this MonoBehaviour, since it's no longer needed.
-            Destroy(gameObject);
         }
     }
 }

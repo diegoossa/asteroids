@@ -11,19 +11,15 @@ namespace DO.Asteroids
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
+            state.RequireForUpdate<DamageEvent>();
         }
 
         public void OnUpdate(ref SystemState state)
         {
             foreach (var localToWorld in SystemAPI.Query<LocalToWorld>().WithAll<DamageEvent>())
             {
-                HybridSignalBus.Instance.OnSpawnExplosion?.Invoke(localToWorld.Position.xy);
+                HybridSignalBus.OnSpawnExplosion?.Invoke(localToWorld.Position.xy);
             }
-        }
-
-        [BurstCompile]
-        public void OnDestroy(ref SystemState state)
-        {
         }
     }
 }

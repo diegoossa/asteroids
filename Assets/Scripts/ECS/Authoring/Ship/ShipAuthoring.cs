@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// Authoring component for the ship.
+    /// </summary>
     public class ShipAuthoring : MonoBehaviour
     {
         public float ThrustForce = 3f;
@@ -22,7 +25,7 @@ namespace DO.Asteroids
                     Drag = authoring.Drag
                 });
                 AddComponent(entity, new PlayerInput());
-                AddComponent(entity, new PhysicsRadius {Value = authoring.Radius});
+                AddComponent(entity, new Radius {Value = authoring.Radius});
                 AddComponent(entity, new Wrap());
                 AddComponent(entity, new Velocity());
             }

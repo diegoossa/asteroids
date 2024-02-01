@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// Authoring component for the ship exhaust.
+    /// </summary>
     public class ShipExhaustAuthoring : MonoBehaviour
     {
         public class ShipExhaustBaker : Baker<ShipExhaustAuthoring>

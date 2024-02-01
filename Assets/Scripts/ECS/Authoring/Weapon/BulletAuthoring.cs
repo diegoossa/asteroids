@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// Authoring component for the bullet.
+    /// </summary>
     public class BulletAuthoring : MonoBehaviour
     {
         public float Speed = 10f;
@@ -17,7 +20,7 @@ namespace DO.Asteroids
                 AddComponent(entity, new Bullet {LifeTime = authoring.LifeTime});
                 AddComponent(entity, new Speed {Value = authoring.Speed});
                 AddComponent(entity, new Direction());
-                AddComponent(entity, new PhysicsRadius {Value = authoring.Radius});
+                AddComponent(entity, new Radius {Value = authoring.Radius});
                 AddComponent(entity, new Wrap());
             }
         }

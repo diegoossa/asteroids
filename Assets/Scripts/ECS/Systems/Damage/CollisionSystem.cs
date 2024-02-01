@@ -35,7 +35,7 @@ namespace DO.Asteroids
             {
                 CommandBuffer = commandBuffer,
                 Bullets = bulletEntities,
-                PhysicsBoundsLookup = SystemAPI.GetComponentLookup<PhysicsRadius>(),
+                PhysicsBoundsLookup = SystemAPI.GetComponentLookup<Radius>(),
                 LocalTransformLookup = SystemAPI.GetComponentLookup<LocalTransform>(),
                 Ship = shipEntity
             };
@@ -46,10 +46,10 @@ namespace DO.Asteroids
         }
 
         [BurstCompile]
-        [WithAll(typeof(PhysicsRadius), typeof(LocalTransform), typeof(Enemy))]
+        [WithAll(typeof(Radius), typeof(LocalTransform), typeof(Enemy))]
         partial struct CollisionJob : IJobEntity
         {
-            [ReadOnly] public ComponentLookup<PhysicsRadius> PhysicsBoundsLookup;
+            [ReadOnly] public ComponentLookup<Radius> PhysicsBoundsLookup;
             [ReadOnly] public ComponentLookup<LocalTransform> LocalTransformLookup;
             [ReadOnly] public NativeArray<Entity> Bullets;
             [ReadOnly] public Entity Ship;

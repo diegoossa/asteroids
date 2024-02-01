@@ -24,6 +24,7 @@ namespace DO.Asteroids
             };
             
             state.Dependency = jobHandle.Schedule(state.Dependency);
+            state.CompleteDependency();
         }
     }
 
@@ -31,7 +32,7 @@ namespace DO.Asteroids
     /// Job to handle ship movement 
     /// </summary>
     [BurstCompile]
-    partial struct ShipMovementJob : IJobEntity
+    public partial struct ShipMovementJob : IJobEntity
     {
         public float DeltaTime;
 

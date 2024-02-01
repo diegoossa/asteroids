@@ -14,10 +14,5 @@ namespace DO.Asteroids.Utils
             var horizontalExtent = verticalExtent * camera.aspect;
             return new float4(-horizontalExtent, horizontalExtent, -verticalExtent, verticalExtent);
         }
-        
-        public static bool OutOfBounds(float4 bounds, float3 position)
-        {
-            return position.x < bounds.x || position.x > bounds.y || position.y < bounds.z || position.y > bounds.w;
-        }
     }
 }

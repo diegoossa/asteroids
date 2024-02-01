@@ -31,31 +31,28 @@ namespace DO.Asteroids.Hybrid
         {
             UnregisterCallbacks();
         }
-        
+
         private void RegisterCallbacks()
         {
-            if (HybridSignalBus.Instance != null)
-            {
-                HybridSignalBus.Instance.OnGameStateChange += OnGameStateChange;
-                HybridSignalBus.Instance.OnLivesChange += OnLivesChange;
-                HybridSignalBus.Instance.OnScoreChange += OnScoreChange;
-            }
+            HybridSignalBus.OnGameStateChange += OnGameStateChange;
+            HybridSignalBus.OnLivesChange += OnLivesChange;
+            HybridSignalBus.OnScoreChange += OnScoreChange;
         }
 
         private void UnregisterCallbacks()
         {
-            HybridSignalBus.Instance.OnGameStateChange -= OnGameStateChange;
-            HybridSignalBus.Instance.OnLivesChange -= OnLivesChange;
-            HybridSignalBus.Instance.OnScoreChange -= OnScoreChange;
+            HybridSignalBus.OnGameStateChange -= OnGameStateChange;
+            HybridSignalBus.OnLivesChange -= OnLivesChange;
+            HybridSignalBus.OnScoreChange -= OnScoreChange;
         }
 
         #endregion
-        
+
         private void OnGameStateChange(GameState state)
         {
             _hudContainer.style.display = state == GameState.Play ? DisplayStyle.Flex : DisplayStyle.None;
         }
-        
+
         private void OnScoreChange(int value)
         {
             _scoreLabel.text = value.ToString();

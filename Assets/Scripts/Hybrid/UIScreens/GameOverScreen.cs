@@ -35,16 +35,16 @@ namespace DO.Asteroids.Hybrid
 
         private void RegisterCallbacks()
         {
-            if (HybridSignalBus.Instance != null)
+            if (HybridSignalBus.OnGameStateChange != null)
             {
-                HybridSignalBus.Instance.OnGameStateChange += OnGameStateChange;
+                HybridSignalBus.OnGameStateChange += OnGameStateChange;
             }
-            
+
             _submitScoreButton.RegisterCallback<ClickEvent>(ev =>
             {
                 // TODO: Submit score to the server 
-                HybridSignalBus.Instance.OnGameStateChange?.Invoke(GameState.Menu);
-                
+                HybridSignalBus.OnGameStateChange?.Invoke(GameState.Menu);
+
                 _gameOverContainer.style.display = DisplayStyle.None;
                 _gameOverLabel.style.display = DisplayStyle.Flex;
             });
@@ -52,7 +52,10 @@ namespace DO.Asteroids.Hybrid
 
         private void UnregisterCallbacks()
         {
-            HybridSignalBus.Instance.OnGameStateChange -= OnGameStateChange;
+            if (HybridSignalBus.OnGameStateChange != null)
+            {
+                HybridSignalBus.OnGameStateChange -= OnGameStateChange;
+            }
         }
 
         private void OnGameStateChange(GameState gameState)

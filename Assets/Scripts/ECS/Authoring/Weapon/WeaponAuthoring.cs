@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// Authoring component for the weapon. 
+    /// </summary>
     public class WeaponAuthoring : MonoBehaviour
     {
         public GameObject BulletPrefab;

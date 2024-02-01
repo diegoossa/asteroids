@@ -7,6 +7,9 @@ using Unity.Transforms;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that spawns asteroids at random positions
+    /// </summary>
     public partial struct AsteroidSpawnSystem : ISystem
     {
         [BurstCompile]
@@ -52,7 +55,7 @@ namespace DO.Asteroids
     }
 
     [BurstCompile]
-    internal struct SpawnAsteroidsJob : IJob
+    public struct SpawnAsteroidsJob : IJob
     {
         public EntityCommandBuffer CommandBuffer;
         public Entity AsteroidPrefab;
@@ -74,7 +77,7 @@ namespace DO.Asteroids
                     CommandBuffer.SetComponent(asteroidEntity, new RotationSpeed {Value = StageSettings.RotationSpeed});
                     CommandBuffer.SetComponent(asteroidEntity, new Direction {Value = Rnd.NextFloat2Direction()});
                     CommandBuffer.SetComponent(asteroidEntity, new Speed {Value = StageSettings.Speed});
-                    CommandBuffer.SetComponent(asteroidEntity, new PhysicsRadius { Value = StageSettings.Scale / 2f });
+                    CommandBuffer.SetComponent(asteroidEntity, new Radius { Value = StageSettings.Scale / 2f });
                 }
             }
         }
