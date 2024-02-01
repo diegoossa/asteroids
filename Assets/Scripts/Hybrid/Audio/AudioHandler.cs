@@ -17,12 +17,12 @@ namespace DO.Asteroids.Hybrid
         
         public void Dispose()
         {
-            HybridSignalBus.OnSpawnExplosion -= OnSpawnExplosion;
+            HybridSignalBus.Instance.OnSpawnExplosion -= OnSpawnExplosion;
         }
         
         public void Initialize()
         {
-            HybridSignalBus.OnSpawnExplosion += OnSpawnExplosion;
+            HybridSignalBus.Instance.OnSpawnExplosion += OnSpawnExplosion;
         }
         
         private void OnSpawnExplosion(Vector2 position)

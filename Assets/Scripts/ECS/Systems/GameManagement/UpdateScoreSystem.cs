@@ -19,7 +19,7 @@ namespace DO.Asteroids
             if (score.ValueRO.Value != score.ValueRO.LastScore)
             {
                 score.ValueRW.LastScore = score.ValueRO.Value;
-                HybridSignalBus.OnScoreChange?.Invoke(score.ValueRO.Value);
+                HybridSignalBus.Instance.OnScoreChange?.Invoke(score.ValueRO.Value);
             }
         }
     }

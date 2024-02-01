@@ -6,16 +6,9 @@ namespace DO.Asteroids
 {
     public partial struct ResetGameSystem : ISystem, ISystemStartStop
     {
-        [BurstCompile]
-        public void OnCreate(ref SystemState state)
-        {
-            state.RequireForUpdate<GameManager>();
-        }
-
         public void OnStartRunning(ref SystemState state)
         {
-            if (HybridSignalBus.OnGameStateChange != null)
-                HybridSignalBus.OnGameStateChange += OnResetGame;
+            HybridSignalBus.Instance.OnGameStateChange -= OnResetGame;
         }
 
         [BurstCompile]
@@ -37,6 +30,7 @@ namespace DO.Asteroids
         
         public void OnStopRunning(ref SystemState state)
         {
+            HybridSignalBus.Instance.OnGameStateChange -= OnResetGame;
         }
     }
 }

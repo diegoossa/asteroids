@@ -19,11 +19,11 @@ namespace DO.Asteroids
             if (lives.ValueRO.CurrentLives != lives.ValueRO.LastLives)
             {
                 lives.ValueRW.LastLives = lives.ValueRO.CurrentLives;
-                HybridSignalBus.OnLivesChange?.Invoke(lives.ValueRO.CurrentLives);
+                HybridSignalBus.Instance.OnLivesChange?.Invoke(lives.ValueRO.CurrentLives);
 
                 if (lives.ValueRO.CurrentLives <= 0)
                 {
-                    HybridSignalBus.OnGameStateChange?.Invoke(GameState.GameOver);
+                    HybridSignalBus.Instance.OnGameStateChange?.Invoke(GameState.GameOver);
                 }
             }
         }

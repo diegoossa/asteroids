@@ -29,8 +29,8 @@ namespace DO.Asteroids.Hybrid
             _playButton.RegisterCallback<ClickEvent>(OnPlayButtonClicked);
             _exitButton.RegisterCallback<ClickEvent>(OnExitButtonClicked);
             
-            if(HybridSignalBus.OnGameStateChange != null)
-                HybridSignalBus.OnGameStateChange += OnGameStateChange;
+            if(HybridSignalBus.Instance != null)
+                HybridSignalBus.Instance.OnGameStateChange += OnGameStateChange;
         }
 
         private void OnExitButtonClicked(ClickEvent evt)
@@ -46,7 +46,7 @@ namespace DO.Asteroids.Hybrid
         private void OnPlayButtonClicked(ClickEvent evt)
         {
             _menuContainer.style.display = DisplayStyle.None;
-            HybridSignalBus.OnGameStateChange?.Invoke(GameState.Play);
+            HybridSignalBus.Instance.OnGameStateChange?.Invoke(GameState.Play);
         }
         
         private void OnGameStateChange(GameState gameState)

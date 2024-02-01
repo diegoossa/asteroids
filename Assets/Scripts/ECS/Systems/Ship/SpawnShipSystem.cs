@@ -23,7 +23,7 @@ namespace DO.Asteroids
 
             if (_shouldSpawnCached != gameManager.ValueRO.ShouldSpawn)
             {
-                HybridSignalBus.OnSpawnShip?.Invoke();
+                HybridSignalBus.Instance.OnSpawnShip?.Invoke();
             }
 
             if (gameManager.ValueRO.CurrentTimer < gameManager.ValueRO.TimeToSpawn)

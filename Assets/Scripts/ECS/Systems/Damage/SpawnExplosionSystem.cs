@@ -18,7 +18,7 @@ namespace DO.Asteroids
         {
             foreach (var localToWorld in SystemAPI.Query<LocalToWorld>().WithAll<DamageEvent>())
             {
-                HybridSignalBus.OnSpawnExplosion?.Invoke(localToWorld.Position.xy);
+                HybridSignalBus.Instance.OnSpawnExplosion?.Invoke(localToWorld.Position.xy);
             }
         }
     }

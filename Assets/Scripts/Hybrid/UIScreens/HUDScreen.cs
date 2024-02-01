@@ -34,16 +34,16 @@ namespace DO.Asteroids.Hybrid
 
         private void RegisterCallbacks()
         {
-            HybridSignalBus.OnGameStateChange += OnGameStateChange;
-            HybridSignalBus.OnLivesChange += OnLivesChange;
-            HybridSignalBus.OnScoreChange += OnScoreChange;
+            HybridSignalBus.Instance.OnGameStateChange += OnGameStateChange;
+            HybridSignalBus.Instance.OnLivesChange += OnLivesChange;
+            HybridSignalBus.Instance.OnScoreChange += OnScoreChange;
         }
 
         private void UnregisterCallbacks()
         {
-            HybridSignalBus.OnGameStateChange -= OnGameStateChange;
-            HybridSignalBus.OnLivesChange -= OnLivesChange;
-            HybridSignalBus.OnScoreChange -= OnScoreChange;
+            HybridSignalBus.Instance.OnGameStateChange -= OnGameStateChange;
+            HybridSignalBus.Instance.OnLivesChange -= OnLivesChange;
+            HybridSignalBus.Instance.OnScoreChange -= OnScoreChange;
         }
 
         #endregion
