@@ -14,8 +14,7 @@ namespace DO.Asteroids
 
         public void OnStartRunning(ref SystemState state)
         {
-            if (HybridSignalBus.OnGameStateChange != null)
-                HybridSignalBus.OnGameStateChange += OnStartGame;
+            HybridSignalBus.OnGameStateChange += OnStartGame;
         }
 
         private void OnStartGame(GameState gameState)

@@ -17,8 +17,6 @@ namespace DO.Asteroids.Hybrid
         private void InstallManagers()
         {
             Container.BindInterfacesAndSelfTo<VFXManager>().AsSingle();
-            Container.BindInstance(HybridSignalBus.OnGameStateChange).AsSingle();
-            Container.BindInstance(HybridSignalBus.OnLivesChange).AsSingle();
         }
 
         private void InstallFactories()
