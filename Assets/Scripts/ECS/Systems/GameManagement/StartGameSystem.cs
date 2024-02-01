@@ -18,7 +18,6 @@ namespace DO.Asteroids
                 HybridSignalBus.OnGameStateChange += OnStartGame;
         }
 
-        [BurstCompile]
         private void OnStartGame(GameState gameState)
         {
             if (gameState == GameState.Play)

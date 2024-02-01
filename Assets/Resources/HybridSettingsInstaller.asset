@@ -17,3 +17,6 @@ MonoBehaviour:
       type: 3}
     SpawnVFXPrefab: {fileID: 6257700285163846973, guid: d62f406226a587740bf91ef6e6eebdb8,
       type: 3}
+  AudioHandler:
+    ExplosionSound: {fileID: 8300000, guid: 5196e99a8f5e6ac4ea9903af6d916906, type: 3}
+    SpawnSound: {fileID: 8300000, guid: 1ec4d3a7dcc69a04e895ba5b6339707f, type: 3}

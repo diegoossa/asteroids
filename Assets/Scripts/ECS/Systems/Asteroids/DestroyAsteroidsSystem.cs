@@ -10,13 +10,13 @@ namespace DO.Asteroids
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
-            state.RequireForUpdate<AsteroidRandomSpawner>();
+            state.RequireForUpdate<AsteroidSpawner>();
         }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var asteroidSpawner = SystemAPI.GetSingletonRW<AsteroidRandomSpawner>();
+            var asteroidSpawner = SystemAPI.GetSingletonRW<AsteroidSpawner>();
             
             if (!asteroidSpawner.ValueRO.ResetAsteroids)
                 return;

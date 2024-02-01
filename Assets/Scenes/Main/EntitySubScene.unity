@@ -220,7 +220,7 @@ MonoBehaviour:
   AsteroidPrefab: {fileID: 3386189613982008513, guid: 57241843b3aad3d4782e79dfe2edb165,
     type: 3}
   NumAsteroids: 4
-  RandomSeed: 42
+  RandomSeed: 512
   ShouldSpawn: 1
 --- !u!114 &537438762
 MonoBehaviour:

@@ -16,6 +16,7 @@ namespace DO.Asteroids
             state.RequireForUpdate<DamageEvent>();
             state.RequireForUpdate<Asteroid>();
             state.RequireForUpdate<Score>();
+            state.RequireForUpdate<DifficultyLevel>();
         }
 
         [BurstCompile]
@@ -27,6 +28,7 @@ namespace DO.Asteroids
             var stageBuffer = SystemAPI.GetSingletonBuffer<Stage>();
             var scoreEntity = SystemAPI.GetSingletonEntity<Score>();
             var score = SystemAPI.GetComponentRO<Score>(scoreEntity).ValueRO.Value;
+            var difficultyLevel = SystemAPI.GetSingleton<DifficultyLevel>();
 
             var jobHandle = new AsteroidDamageJob
             {
@@ -34,7 +36,8 @@ namespace DO.Asteroids
                 Rnd = random,
                 StageBuffer = stageBuffer,
                 ScoreEntity = scoreEntity,
-                CurrentScore = score
+                CurrentScore = score,
+                SpeedMultiplier = difficultyLevel.CurrentLevel * difficultyLevel.SpeedMultiplier
             };
 
             state.Dependency = jobHandle.Schedule(state.Dependency);
@@ -45,6 +48,7 @@ namespace DO.Asteroids
         partial struct AsteroidDamageJob : IJobEntity
         {
             [ReadOnly] public DynamicBuffer<Stage> StageBuffer;
+            [ReadOnly] public float SpeedMultiplier;
             public EntityCommandBuffer CommandBuffer;
             public Random Rnd;
             public Entity ScoreEntity;
@@ -72,7 +76,7 @@ namespace DO.Asteroids
                 {
                     // Set the next stage
                     var nextStage = StageBuffer[asteroid.CurrentStage];
-                    speed.Value = nextStage.Speed;
+                    speed.Value = nextStage.Speed + SpeedMultiplier;
                     direction.Value = Rnd.NextFloat2Direction();
                     radius.Value = nextStage.Scale;
                     transform = LocalTransform.FromPositionRotationScale(transform.Position, transform.Rotation,

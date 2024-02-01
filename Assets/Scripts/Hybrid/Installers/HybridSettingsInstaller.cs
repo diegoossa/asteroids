@@ -7,10 +7,12 @@ namespace DO.Asteroids.Hybrid
     public class HybridSettingsInstaller : ScriptableObjectInstaller<HybridSettingsInstaller>
     {
         public HybridGameInstaller.Settings GameInstallerSettings;
+        public AudioHandler.Settings AudioHandler;
         
         public override void InstallBindings()
         {
             Container.BindInstance(GameInstallerSettings).IfNotBound();
+            Container.BindInstance(AudioHandler);
         }
     }
 }

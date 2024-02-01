@@ -17,13 +17,14 @@ namespace DO.Asteroids
         {
             state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
             state.RequireForUpdate<LevelBounds>();
-            state.RequireForUpdate<AsteroidRandomSpawner>();
+            state.RequireForUpdate<AsteroidSpawner>();
+            state.RequireForUpdate<DifficultyLevel>();
         }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var spawner = SystemAPI.GetSingletonRW<AsteroidRandomSpawner>();
+            var spawner = SystemAPI.GetSingletonRW<AsteroidSpawner>();
             if (!spawner.ValueRO.ShouldSpawn)
                 return;
 
@@ -33,16 +34,29 @@ namespace DO.Asteroids
             var random = new Random(spawner.ValueRO.RandomSeed);
             var avoidPositions = new NativeList<float3>(Allocator.TempJob) {float3.zero};
             var initialStage = SystemAPI.GetSingletonBuffer<Stage>()[0];
+            var difficultyLevel = SystemAPI.GetSingletonRW<DifficultyLevel>();
+
+            // Increase the difficulty level from the spawner to avoid multiple increases
+            if (spawner.ValueRO.IncreaseDifficulty)
+            {
+                difficultyLevel.ValueRW.CurrentLevel++;
+                spawner.ValueRW.IncreaseDifficulty = false;
+            }
+
+            // Calculate the number of asteroids to spawn
+            var numAsteroids = spawner.ValueRO.NumAsteroids + difficultyLevel.ValueRO.CurrentLevel * difficultyLevel.ValueRO.CountMultiplier;
+            var speedMultiplier = difficultyLevel.ValueRO.CurrentLevel * difficultyLevel.ValueRO.SpeedMultiplier;
 
             var jobHandle = new SpawnAsteroidsJob
             {
                 CommandBuffer = commandBuffer,
                 AsteroidPrefab = spawner.ValueRO.AsteroidPrefab,
-                NumAsteroids = spawner.ValueRO.NumAsteroids,
+                NumAsteroids = numAsteroids,
                 Bounds = levelBounds.Bounds,
                 Rnd = random,
                 AvoidPositions = avoidPositions,
-                StageSettings = initialStage
+                StageSettings = initialStage,
+                SpeedMultiplier = speedMultiplier
             };
 
             state.Dependency = jobHandle.Schedule(state.Dependency);
@@ -64,6 +78,7 @@ namespace DO.Asteroids
         public Stage StageSettings;
         public Random Rnd;
         public NativeList<float3> AvoidPositions;
+        public float SpeedMultiplier;
 
         public void Execute()
         {
@@ -73,11 +88,13 @@ namespace DO.Asteroids
 
                 if (TryGetValidPosition(StageSettings.Scale, out var randomPosition))
                 {
-                    CommandBuffer.SetComponent(asteroidEntity, LocalTransform.FromPositionRotationScale(randomPosition, Rnd.NextQuaternionRotation(), StageSettings.Scale));
+                    CommandBuffer.SetComponent(asteroidEntity,
+                        LocalTransform.FromPositionRotationScale(randomPosition, Rnd.NextQuaternionRotation(),
+                            StageSettings.Scale));
                     CommandBuffer.SetComponent(asteroidEntity, new RotationSpeed {Value = StageSettings.RotationSpeed});
                     CommandBuffer.SetComponent(asteroidEntity, new Direction {Value = Rnd.NextFloat2Direction()});
-                    CommandBuffer.SetComponent(asteroidEntity, new Speed {Value = StageSettings.Speed});
-                    CommandBuffer.SetComponent(asteroidEntity, new Radius { Value = StageSettings.Scale / 2f });
+                    CommandBuffer.SetComponent(asteroidEntity, new Speed {Value = StageSettings.Speed + SpeedMultiplier});
+                    CommandBuffer.SetComponent(asteroidEntity, new Radius {Value = StageSettings.Scale / 2f});
                 }
             }
         }
@@ -109,7 +126,7 @@ namespace DO.Asteroids
                     return true;
                 }
             }
-            
+
             // If we can't find a valid position, just return a random position
             position = new float3(Rnd.NextFloat(Bounds.x, Bounds.y), Rnd.NextFloat(Bounds.z, Bounds.w), 0);
             return false;

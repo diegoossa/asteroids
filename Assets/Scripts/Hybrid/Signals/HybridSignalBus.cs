@@ -14,13 +14,4 @@ namespace DO.Asteroids.Hybrid
         public static Action<int> OnLivesChange;
         public static Action<Vector2> OnSpawnExplosion;
     }
-    
-    public enum GameState
-    {
-        None,
-        Menu,
-        Play,
-        Pause,
-        GameOver
-    }
 }

@@ -30,7 +30,7 @@ namespace DO.Asteroids
                 var score = SystemAPI.GetSingletonRW<Score>();
                 score.ValueRW.Value = 0;
                 
-                var asteroidSpawner = SystemAPI.GetSingletonRW<AsteroidRandomSpawner>();
+                var asteroidSpawner = SystemAPI.GetSingletonRW<AsteroidSpawner>();
                 asteroidSpawner.ValueRW.ResetAsteroids = true;
             }
         }

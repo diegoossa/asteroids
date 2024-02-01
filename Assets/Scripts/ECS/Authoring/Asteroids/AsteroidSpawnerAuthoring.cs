@@ -18,7 +18,7 @@ namespace DO.Asteroids
             public override void Bake(AsteroidSpawnerAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
-                AddComponent(entity, new AsteroidRandomSpawner
+                AddComponent(entity, new AsteroidSpawner
                 {
                     AsteroidPrefab = GetEntity(authoring.AsteroidPrefab, TransformUsageFlags.Dynamic),
                     NumAsteroids = authoring.NumAsteroids,

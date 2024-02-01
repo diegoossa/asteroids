@@ -22,7 +22,7 @@ namespace DO.Asteroids
                 {
                     ShipPrefab = GetEntity(authoring.ShipPrefab, TransformUsageFlags.Dynamic),
                     TimeToSpawn = authoring.TimeToSpawn,
-                    ShouldSpawn = authoring.ShouldSpawn,
+                    ShouldSpawn = authoring.ShouldSpawn
                 });
                 AddComponent(entity, new Lives
                 {
@@ -34,6 +34,12 @@ namespace DO.Asteroids
                 {
                     Value = 0, 
                     LastScore = -1
+                });
+                AddComponent(entity, new DifficultyLevel
+                {
+                    CurrentLevel = 0,
+                    CountMultiplier = 2,
+                    SpeedMultiplier = 0.25f
                 });
             }
         }

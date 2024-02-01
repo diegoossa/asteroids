@@ -25,6 +25,8 @@ namespace DO.Asteroids
 
     public struct DifficultyLevel : IComponentData
     {
-        
+        public int CurrentLevel;
+        public int CountMultiplier;
+        public float SpeedMultiplier;
     }
 }
