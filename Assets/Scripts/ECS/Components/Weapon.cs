@@ -2,6 +2,9 @@ using Unity.Entities;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// Weapon component for the ship.
+    /// </summary>
     public struct Weapon : IComponentData
     {
         public Entity BulletPrefab;

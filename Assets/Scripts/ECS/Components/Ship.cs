@@ -2,6 +2,9 @@
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// Ship component.
+    /// </summary>
     public struct Ship : IComponentData
     {
         public float ThrustForce;

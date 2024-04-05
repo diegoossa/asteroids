@@ -5,6 +5,9 @@ using Unity.Transforms;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that spawns bullets when the weapon is firing.
+    /// </summary>
     public partial struct SpawnBulletSystem : ISystem
     {
         [BurstCompile]

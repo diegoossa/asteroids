@@ -4,6 +4,9 @@ using Unity.Entities;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that starts the game when the game state changes to play.
+    /// </summary>
     public partial struct StartGameSystem : ISystem, ISystemStartStop
     {
         public void OnStartRunning(ref SystemState state)

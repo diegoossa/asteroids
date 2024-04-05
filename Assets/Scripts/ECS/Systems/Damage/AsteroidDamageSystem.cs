@@ -6,6 +6,9 @@ using Unity.Transforms;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// Asteroid damage system.
+    /// </summary>
     [UpdateAfter(typeof(SpawnExplosionSystem))]
     public partial struct AsteroidDamageSystem : ISystem
     {

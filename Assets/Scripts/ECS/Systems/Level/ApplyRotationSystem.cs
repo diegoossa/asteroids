@@ -4,6 +4,9 @@ using Unity.Transforms;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that applies the rotation of the entities.
+    /// </summary>
     public partial struct ApplyRotationSystem : ISystem
     {
         public void OnCreate(ref SystemState state)

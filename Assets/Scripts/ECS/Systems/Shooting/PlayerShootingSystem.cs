@@ -3,6 +3,9 @@ using Unity.Entities;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that handles the player shooting.
+    /// </summary>
     public partial struct PlayerShootingSystem : ISystem
     {
         [BurstCompile]

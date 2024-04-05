@@ -3,6 +3,9 @@ using Unity.Entities;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that increases the difficulty of the game.
+    /// </summary>
     [UpdateBefore(typeof(AsteroidSpawnSystem))]
     public partial struct DifficultySystem : ISystem
     {

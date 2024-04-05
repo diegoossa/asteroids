@@ -3,6 +3,9 @@ using UnityEngine.UIElements;
 
 namespace DO.Asteroids.Hybrid
 {
+    /// <summary>
+    /// Class that represents the menu screen.
+    /// </summary>
     [RequireComponent(typeof(UIDocument))]
     public class MenuScreen : MonoBehaviour
     {

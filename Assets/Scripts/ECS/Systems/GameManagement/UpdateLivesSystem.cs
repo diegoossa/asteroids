@@ -4,6 +4,9 @@ using Unity.Entities;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that updates the lives of the player.
+    /// </summary>
     [UpdateAfter(typeof(ShipDamageSystem))]
     public partial struct UpdateLivesSystem : ISystem
     {

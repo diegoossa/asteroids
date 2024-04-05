@@ -4,6 +4,9 @@ using Zenject;
 
 namespace DO.Asteroids.Hybrid
 {
+    /// <summary>
+    /// Handles the installation of the hybrid components of the game.
+    /// </summary>
     public class HybridGameInstaller : MonoInstaller
     {
         [Inject] private Settings _settings;

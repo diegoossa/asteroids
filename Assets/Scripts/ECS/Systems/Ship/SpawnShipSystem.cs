@@ -4,6 +4,9 @@ using Unity.Entities;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that spawns the ship.
+    /// </summary>
     public partial struct SpawnShipSystem : ISystem
     {
         private bool _shouldSpawnCached;

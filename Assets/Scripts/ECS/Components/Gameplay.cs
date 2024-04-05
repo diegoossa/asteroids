@@ -3,6 +3,7 @@ using Unity.Mathematics;
 
 namespace DO.Asteroids
 {
+    // This file contains common components used in the gameplay systems
     public struct Direction : IComponentData
     {
         public float2 Value;

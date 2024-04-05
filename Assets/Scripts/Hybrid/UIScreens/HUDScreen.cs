@@ -4,6 +4,9 @@ using UnityEngine.UIElements.Experimental;
 
 namespace DO.Asteroids.Hybrid
 {
+    /// <summary>
+    /// Class that handles the HUD screen.
+    /// </summary>
     [RequireComponent(typeof(UIDocument))]
     public class HUDScreen : MonoBehaviour
     {

@@ -2,6 +2,9 @@ using Unity.Entities;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// The AsteroidSpawner component is used to spawn asteroids.
+    /// </summary>
     public struct AsteroidSpawner : IComponentData
     {
         public Entity AsteroidPrefab;
@@ -12,11 +15,17 @@ namespace DO.Asteroids
         public bool IncreaseDifficulty;
     }
 
+    /// <summary>
+    /// The Asteroid component is used to identify an asteroid entity.
+    /// </summary>
     public struct Asteroid : IComponentData
     {
         public int CurrentStage;
     }
     
+    /// <summary>
+    /// The Stage component is used to store asteroid settings for each stage.
+    /// </summary>
     [InternalBufferCapacity(3)]
     public struct Stage : IBufferElementData
     {

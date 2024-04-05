@@ -3,6 +3,9 @@ using Unity.Entities;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that destroys all asteroids in the scene.
+    /// </summary>
     [UpdateBefore(typeof(AsteroidSpawnSystem))]
     public partial struct DestroyAsteroidsSystem : ISystem
     {

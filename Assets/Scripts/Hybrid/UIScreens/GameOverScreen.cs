@@ -4,6 +4,9 @@ using UnityEngine.UIElements;
 
 namespace DO.Asteroids.Hybrid
 {
+    /// <summary>
+    /// View for the game over screen.
+    /// </summary>
     [RequireComponent(typeof(UIDocument))]
     public class GameOverScreen : MonoBehaviour
     {

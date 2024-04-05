@@ -5,6 +5,9 @@ using Unity.Transforms;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that updates the scale of the ship exhaust based on the ship velocity.
+    /// </summary>
     [BurstCompile]
     public partial struct ShipExhaustSystem : ISystem
     {

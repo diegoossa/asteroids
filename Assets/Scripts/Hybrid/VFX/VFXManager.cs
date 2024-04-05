@@ -3,6 +3,9 @@ using Zenject;
 
 namespace DO.Asteroids.Hybrid
 {
+    /// <summary>
+    /// Handles VFX spawning.
+    /// </summary>
     public class VFXManager : IInitializable
     {
         private Explosion.Factory _explosionFactory;

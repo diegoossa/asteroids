@@ -2,6 +2,9 @@
 
 namespace DO.Asteroids.Hybrid
 {
+    /// <summary>
+    /// Application controller.
+    /// </summary>
     public class ApplicationController : MonoBehaviour
     {
         private void Start()

@@ -5,6 +5,9 @@ using Unity.Mathematics;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that handles ship damage.
+    /// </summary>
     [UpdateAfter(typeof(SpawnExplosionSystem))]
     public partial struct ShipDamageSystem : ISystem
     {

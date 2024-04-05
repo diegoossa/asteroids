@@ -4,6 +4,9 @@ using Unity.Transforms;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that applies the movement of the entities.
+    /// </summary>
     [BurstCompile]
     public partial struct ApplyMovementSystem : ISystem
     {

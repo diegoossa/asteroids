@@ -5,6 +5,9 @@ using Unity.Transforms;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that wraps entities around the level bounds.
+    /// </summary>
     [BurstCompile]
     public partial struct WrappingSystem : ISystem
     {

@@ -4,6 +4,9 @@ using Zenject;
 
 namespace DO.Asteroids.Hybrid
 {
+    /// <summary>
+    /// Class that handles the audio.
+    /// </summary>
     public class AudioHandler : IInitializable, IDisposable
     {
         private readonly Settings _settings;

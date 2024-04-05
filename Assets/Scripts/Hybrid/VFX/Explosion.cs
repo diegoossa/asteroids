@@ -3,6 +3,9 @@ using Zenject;
 
 namespace DO.Asteroids.Hybrid
 {
+    /// <summary>
+    /// Explosion VFX.
+    /// </summary>
     public class Explosion : MonoBehaviour, IPoolable<IMemoryPool>
     {
         [SerializeField] private float lifeTime;

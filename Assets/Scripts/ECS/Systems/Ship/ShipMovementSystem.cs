@@ -5,6 +5,9 @@ using Unity.Transforms;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that handles the movement of the ship.
+    /// </summary>
     [BurstCompile]
     public partial struct ShipMovementSystem : ISystem
     {

@@ -3,6 +3,9 @@ using Zenject;
 
 namespace DO.Asteroids.Hybrid
 {
+    /// <summary>
+    /// Spawn VFX Pool.
+    /// </summary>
     public class SpawnVFX : MonoBehaviour, IPoolable<IMemoryPool>
     {
         [SerializeField] private float lifeTime;

@@ -4,6 +4,9 @@ using Unity.Entities;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that updates the score of the player.
+    /// </summary>
     [UpdateAfter(typeof(AsteroidDamageSystem))]
     public partial struct UpdateScoreSystem : ISystem
     {

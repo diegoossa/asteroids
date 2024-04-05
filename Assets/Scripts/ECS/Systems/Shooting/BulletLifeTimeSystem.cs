@@ -3,6 +3,9 @@ using Unity.Entities;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that destroys bullets after a certain amount of time.
+    /// </summary>
     public partial struct BulletLifeTimeSystem : ISystem
     {
         [BurstCompile]

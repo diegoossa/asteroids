@@ -6,6 +6,9 @@ using Unity.Transforms;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that handles collision detection.
+    /// </summary>
     [BurstCompile]
     [UpdateAfter(typeof(TransformSystemGroup))]
     public partial struct CollisionSystem : ISystem

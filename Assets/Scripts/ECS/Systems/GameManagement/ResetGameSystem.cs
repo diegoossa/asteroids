@@ -3,6 +3,9 @@ using Unity.Entities;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that resets the game state when the game is reset.
+    /// </summary>
     public partial struct ResetGameSystem : ISystem, ISystemStartStop
     {
         public void OnStartRunning(ref SystemState state)

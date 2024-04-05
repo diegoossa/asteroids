@@ -5,6 +5,9 @@ using Unity.Transforms;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that spawns an explosion at the position of the entity that took damage.
+    /// </summary>
     [UpdateAfter(typeof(CollisionSystem))]
     public partial struct SpawnExplosionSystem : ISystem
     {

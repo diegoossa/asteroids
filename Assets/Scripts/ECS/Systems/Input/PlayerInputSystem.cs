@@ -2,6 +2,9 @@ using Unity.Entities;
 
 namespace DO.Asteroids
 {
+    /// <summary>
+    /// System that updates the player input.
+    /// </summary>
     [UpdateInGroup(typeof(InitializationSystemGroup), OrderLast = true)]
     public partial class PlayerInputSystem : SystemBase
     {
